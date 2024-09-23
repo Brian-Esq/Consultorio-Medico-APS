@@ -5,13 +5,12 @@
     font-family: 'Nunito Sans', sans-serif;
   }
 
-.navigWords{
+.navWords{
     font-weight: 800;
     color: White;
     text-align: center;
     font-size: 20px;
     margin: 5px 30px;
-    text-decoration-line: none;
   }
 
 .underline-link {
@@ -36,4 +35,12 @@
 
 .bot{
   text-align: center;
+}
+
+.brandName{
+  font-weight: 800;
+  color: White;
+  text-align: center;
+  font-size: 30px;
+  margin: 5px 30px;
 }

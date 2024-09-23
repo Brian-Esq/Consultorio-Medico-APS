@@ -1,19 +1,29 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
-body{
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+  position: relative;
+  margin: 0;
+  background-color: whitesmoke;
+}
+
+body {
   margin: 0;
   font-family: 'Nunito Sans', sans-serif;
 }
 
-.BodyContent {
-  position: relative;
-  margin: 0;
-  min-height: 87hv;
+.mainCont {
+  flex: 1;
 }
 
-.mainCont{
-  height: 100%;
-  background-color: whitesmoke;
+footer {
+  text-align: center;
 }

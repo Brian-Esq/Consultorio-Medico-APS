@@ -1,9 +1,9 @@
 
 function Login(){
     return(
-        <footer>
+        <div>
             <p>Este es el footer</p>
-        </footer>
+        </div>
     )
 }
 
