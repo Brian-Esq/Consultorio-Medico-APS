@@ -2,7 +2,7 @@
 function Home(){
     return(
         <footer>
-            <p>Este es el footer</p>
+            <p>Este es el Home</p>
         </footer>
     )
 }
