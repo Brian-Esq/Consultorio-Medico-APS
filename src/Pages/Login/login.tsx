@@ -1,8 +1,9 @@
+import './login.css';
 
 function Login(){
     return(
         <div>
-            <p>Este es el footer</p>
+            <p>Este es el Login</p>
         </div>
     )
 }

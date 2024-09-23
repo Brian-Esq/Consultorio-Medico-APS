@@ -8,13 +8,14 @@ function Header(){
         <div className="App-header">
             <Navbar collapseOnSelect expand="lg">
                 <Container fluid>
-                <Navbar.Brand href='/'><p className='brandName'>InfoSys</p></Navbar.Brand>
+                <Navbar.Brand href='/'><p className='brandName'>MediSys</p></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto resNavBar">
-                            <Nav.Link href='/consulta' className="navWords underline-link">Consultas</Nav.Link >
-                            <Nav.Link href='/' className="navWords underline-link">Citas</Nav.Link >
-                            <Nav.Link href='/' className="navWords underline-link">Reportes</Nav.Link >
+                            <Nav.Link href='/citas' className="underline-link"><p className='navWords'>Citas</p></Nav.Link >
+                            <Nav.Link href='/expedientes' className="underline-link"><p className='navWords'>Expendientes</p></Nav.Link >
+                            <Nav.Link href='/reportes' className="underline-link"><p className='navWords'>Reportes</p></Nav.Link >
+                            <Nav.Link href='/config' className="underline-link"><p className='navWords'>Configuración</p></Nav.Link >
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -1,4 +1,3 @@
-import React from 'react';
 import './home.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -15,7 +14,7 @@ function Home(){
                 </Row>
                 <Row>
                     <Col>
-                        <h1 className='sysTitle'>InfoSys</h1>
+                        <h1 className='sysTitle'>MediSys</h1>
                     </Col>
                 </Row>
             </Container>
