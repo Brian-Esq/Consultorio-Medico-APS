@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.citasTitleRow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.citasTitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}
+
+.citasButRow{
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .initCons{
+    background-color: green;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
+    width: 200px;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 17px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }

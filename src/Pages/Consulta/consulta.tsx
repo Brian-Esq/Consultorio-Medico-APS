@@ -1,26 +1,27 @@
-import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './consulta.css';
+import { Link } from "react-router-dom";
+import Prescription from '../../Componentes/Prescription/prescription';
 
 function Consulta(){
     return(
         <Container className="consultaPage">
-            <Row className='consultaTitle'>
+            <Row className='consultaTitleRow'>
                 <Col>
                     <h1 className='consTitle'>Sección de Consulta</h1>
                 </Col>
             </Row>
             <Row className='buttons'>
-                <Col xs={12} md={2}></Col>
-                <Col xs={12} md={4}>
-                    <button className="initCons">Iniciar Consulta</button>
+                <Col>
+                    <Link to='/citas'><button className="finCons">Terminar Consulta</button></Link>
                 </Col>
-                <Col xs={12} md={4}>
-                    <button className="finCons">Terminar Consulta</button>
+            </Row>
+            <Row>
+                <Col>
+                    <Prescription />
                 </Col>
-                <Col xs={12} md={2}></Col>
             </Row>
         </Container>
     )

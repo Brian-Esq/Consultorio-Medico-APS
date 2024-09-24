@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
 
-.consultaTitle{
+.consultaTitleRow{
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -12,20 +12,6 @@
     font-size: 40px;
     margin: 5px 30px;
 }
-
-.initCons{
-    background-color: green;
-    font-weight: bold;
-    font-family: 'Nunito Sans', sans-serif;
-    color: white;
-    width: 200px;
-    height: 35px;
-    border-radius: 20px;
-    font-size: 17px;
-    border: none;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
 
   .finCons{
     background-color: red;
