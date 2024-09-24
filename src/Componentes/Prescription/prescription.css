@@ -31,3 +31,30 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.presCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.prescriptionTable {
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.prescriptionTable th, .prescriptionTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.prescriptionTable th {
+    background-color: grey;
+    font-weight: bold;
+}
+.prescriptionTable td {
+    background-color: white;
+}
