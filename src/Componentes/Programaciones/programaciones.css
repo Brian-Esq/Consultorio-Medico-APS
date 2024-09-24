@@ -1,30 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
 
-.card {
-    background-color: white;
-    width: 18rem;
-    text-align: center;
-    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
-    border-color: white;
-    border-radius: 20px;
-    float: none;
+.progsPage{
+    display: flex;
+    justify-content: center;
 }
 
-.progsCol{
-    display: flex;
-    align-items: center;
+.card {
+    background-color: white;
+    width: 20rem;
+    text-align: center;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    border-color: rgb(39, 196, 224);
+    border-radius: 20px;
 }
 
 .initCons{
-    background-color: green;
+    background-color: white;
     font-weight: bold;
     font-family: 'Nunito Sans', sans-serif;
-    color: white;
-    width: 200px;
+    color: rgb(39, 196, 224);
+    width: 150px;
     height: 35px;
-    border-radius: 20px;
-    font-size: 17px;
-    border: none;
+    border-radius: 10px;
+    font-size: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
+    border-color: rgb(39, 196, 224);
+    float: left;
+  }
+
+  .progData{
+    float: left;
+    margin: 0;
   }

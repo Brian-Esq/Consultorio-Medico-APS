@@ -20,11 +20,38 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
     return (
         <Container className="progsPage">
             <Row>
-                <Col className="progsCol">
+                <Col>
                     <Card className="card">
                         <Card.Body>
                             <Row>
-                                <Link to='/consulta'><button className="initCons">Iniciar Consulta</button></Link>
+                                <Col>
+                                    <p className='progData'>Consulta id: {id}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p className='progData'>Fecha: {fecha} - {hora}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p className='progData'>Paciente: {Paciente}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p className='progData'>Tipo de Cita: {TipoCita}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p className='progData'>Doctor: {Empleado}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <Link to='/consulta'><button className="initCons">Iniciar Consulta</button></Link>
+                                </Col>
                             </Row>
                         </Card.Body>
                     </Card>

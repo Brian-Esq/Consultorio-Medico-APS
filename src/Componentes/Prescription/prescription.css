@@ -11,6 +11,7 @@
     background-color: azure;
     border-radius: 20px;
     box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
 }
 
 .presForms{
@@ -55,6 +56,20 @@
     background-color: grey;
     font-weight: bold;
 }
+
 .prescriptionTable td {
     background-color: white;
 }
+
+.styled-input {
+    box-sizing: border-box;
+    border: 2px solid #66afe9;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .styled-input:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  }

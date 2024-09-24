@@ -13,14 +13,7 @@
     margin: 5px 30px;
 }
 
-.citasButRow{
-    align-items: center;
-  }
-
-.citasButCol{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.citasBodyRows{
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

@@ -22,17 +22,23 @@ function PrescriptionComponent() {
                     <form onSubmit={ev => {
                         ev.preventDefault();
                         const target = ev.target as HTMLFormElement;
-                        const newPrescription: Prescription = {
-                            padecimiento: (target.elements.namedItem('padecimiento') as HTMLInputElement).value,
-                            tratamiento: (target.elements.namedItem('tratamiento') as HTMLInputElement).value,
-                            duracion: (target.elements.namedItem('duracion') as HTMLInputElement).value,
-                            comentarios: (target.elements.namedItem('comentarios') as HTMLInputElement).value,
-                        };
+                        const padecimiento = (target.elements.namedItem('padecimiento') as HTMLInputElement).value;
+                        const tratamiento = (target.elements.namedItem('tratamiento') as HTMLInputElement).value;
+                        const duracion = (target.elements.namedItem('duracion') as HTMLInputElement).value;
+                        const comentarios = (target.elements.namedItem('comentarios') as HTMLInputElement).value;
 
-                        setPrescriptions([...prescriptions, newPrescription]);
-
-                        // Reset the form fields
-                        target.reset();
+                        if (padecimiento && tratamiento && duracion && comentarios) {
+                            const newPrescription: Prescription = {
+                                padecimiento,
+                                tratamiento,
+                                duracion,
+                                comentarios,
+                            };
+                            setPrescriptions([...prescriptions, newPrescription]);
+                            target.reset();
+                        } else {
+                            alert('Por favor, complete todos los campos.');
+                        }
                     }} className='presForms'>
                         <Row className='formRows'>
                             <Col>
@@ -44,7 +50,7 @@ function PrescriptionComponent() {
                                 <label>Padecimiento</label>
                             </Col>
                             <Col>
-                                <input type='text' name='padecimiento' autoComplete='off'/>
+                                <input type='text' name='padecimiento' autoComplete='off' className='styled-input'/>
                             </Col>
                         </Row>
                         <Row className='formRows'>
@@ -52,7 +58,7 @@ function PrescriptionComponent() {
                                 <label>Tratamiento</label>
                             </Col>
                             <Col>
-                                <input type='text' name='tratamiento' autoComplete='off'/>
+                                <input type='text' name='tratamiento' autoComplete='off' className='styled-input'/>
                             </Col>
                         </Row>
                         <Row className='formRows'>
@@ -60,7 +66,7 @@ function PrescriptionComponent() {
                                 <label>Duración</label>
                             </Col>
                             <Col>
-                                <input type='text' name='duracion' autoComplete='off'/>
+                                <input type='text' name='duracion' autoComplete='off' className='styled-input'/>
                             </Col>
                         </Row>
                         <Row className='formRows'>
@@ -68,7 +74,7 @@ function PrescriptionComponent() {
                                 <label>Comentarios</label>
                             </Col>
                             <Col>
-                                <input type='text' name='comentarios' autoComplete='off'/>
+                                <input type='text' name='comentarios' autoComplete='off' className='styled-input'/>
                             </Col>
                         </Row>
                         <Row className='formRows'>
