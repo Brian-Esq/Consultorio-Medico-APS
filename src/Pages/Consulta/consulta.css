@@ -13,6 +13,9 @@
     margin: 5px 30px;
 }
 
+.consData{
+  margin-bottom: 20px;
+}
   .finCons{
     background-color: red;
     font-weight: bold;
@@ -40,4 +43,27 @@
     background-color: white;
     border-radius: 20px;
     box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .styled-input-general{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+  }
+
+  .generalDataRows{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .comentariosGen{
+    width: 100%;
+    float: left;
+    resize: none;
+    height: 100px;
   }

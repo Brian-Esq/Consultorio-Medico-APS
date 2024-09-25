@@ -38,12 +38,14 @@
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .prescriptionTable {
     margin: auto;
     border-collapse: collapse;
     width: 100%;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
 }
 
 .prescriptionTable th, .prescriptionTable td {
