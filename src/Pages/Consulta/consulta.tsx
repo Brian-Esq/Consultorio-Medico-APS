@@ -18,6 +18,30 @@ function Consulta(){
                     <Link to='/citas'><button className="finCons">Terminar Consulta</button></Link>
                 </Col>
             </Row>
+            <Row className='buttons'>
+                <Col>
+                    <Row>
+                        <Col>
+                            <h2>Datos de Consulta</h2>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>Cita ID: </p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>Nombre del Paciente: </p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <p>Tipo de Cita:</p>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
             <Row>
                 <Col>
                     <Prescription />

@@ -25,7 +25,7 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
                         <Card.Body>
                             <Row>
                                 <Col>
-                                    <p className='progData'>Consulta id: {id}</p>
+                                    <p className='progData'>Cita id: {id}</p>
                                 </Col>
                             </Row>
                             <Row>
