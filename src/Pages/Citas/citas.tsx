@@ -1,7 +1,10 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './citas.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import Programaciones from '../../Componentes/Programaciones/programaciones';
 
 interface CitaMedica {
@@ -14,7 +17,11 @@ interface CitaMedica {
     Empleado: string
 }
 
+const ITEMS_PER_PAGE = 2;
+
 function Citas() {
+    const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
 
     const citas: CitaMedica[] = [
         {
@@ -43,8 +50,48 @@ function Citas() {
             Asistencia: true,
             Paciente: 'Charlie',
             Empleado: 'Doe'
+        },
+        {
+            id: 4,
+            fecha: '2021-09-04',
+            hora: '13:00',
+            TipoCita: 'Consulta',
+            Asistencia: true,
+            Paciente: 'David',
+            Empleado: 'Smith'
+        },
+        {
+            id: 5,
+            fecha: '2021-09-05',
+            hora: '14:00',
+            TipoCita: 'Operación',
+            Asistencia: false,
+            Paciente: 'Eve',
+            Empleado: 'Johnson'
         }
     ];
+
+    const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    const currentItems = citas.slice(indexOfFirstItem, indexOfLastItem);
+
+    const totalPages = Math.ceil(citas.length / ITEMS_PER_PAGE);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleConsulta = (cita: CitaMedica) => {
+        navigate(`/consulta/${cita.id}`, { state: { cita } });
+    };
 
     return (
         <Container className='citasPage'>
@@ -53,21 +100,40 @@ function Citas() {
                     <h1 className='citasTitle'>Citas Programadas</h1>
                 </Col>
             </Row>
-            {citas.map(cita => (
-                <Row key={cita.id} className='citasBodyRows'>
-                    <Col>
-                        <Programaciones 
-                            id={cita.id} 
-                            fecha={cita.fecha} 
-                            hora={cita.hora}
-                            TipoCita={cita.TipoCita} 
-                            Asistencia={cita.Asistencia} 
-                            Paciente={cita.Paciente} 
-                            Empleado={cita.Empleado}
-                        />
-                    </Col>
-                </Row>
-            ))}
+            <Row>
+                <Col xs={2} md={3} xxl={4}></Col>
+                <Col xs={8} md={6} xxl={4} className='vistaCitas'>
+                    {currentItems.map(cita => (
+                        <Row key={cita.id} className='citasBodyRows'>
+                            <Col>
+                                <Programaciones
+                                    id={cita.id}
+                                    fecha={cita.fecha}
+                                    hora={cita.hora}
+                                    TipoCita={cita.TipoCita}
+                                    Asistencia={cita.Asistencia}
+                                    Paciente={cita.Paciente}
+                                    Empleado={cita.Empleado}
+                                />
+                            </Col>
+                        </Row>
+                    ))}
+                </Col>
+                <Col xs={2} md={3} xxl={4}></Col>
+            </Row>
+            <Row className='paginationRow'>
+                <Col xs={2} md={3} xxl={4}></Col>
+                <Col xs={8} md={6} xxl={4}>
+                    <Button onClick={handlePreviousPage} disabled={currentPage === 1} className='navBotones'>
+                        &lt;
+                    </Button>
+                    <span>{` Página ${currentPage} de ${totalPages} `}</span>
+                    <Button onClick={handleNextPage} disabled={currentPage === totalPages} className='navBotones'>
+                        &gt;
+                    </Button>
+                </Col>
+                <Col xs={2} md={3} xxl={4}></Col>
+            </Row>
         </Container>
     )
 }

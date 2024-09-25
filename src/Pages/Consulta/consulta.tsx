@@ -4,9 +4,14 @@ import Col from 'react-bootstrap/Col';
 import './consulta.css';
 import { Link } from "react-router-dom";
 import Prescription from '../../Componentes/Prescription/prescription';
+import { useLocation, useParams } from 'react-router-dom';
 
-function Consulta(){
-    return(
+function Consulta() {
+    const { id } = useParams();
+    const location = useLocation();
+    const { cita } = location.state;
+
+    return (
         <Container className="consultaPage">
             <Row className='consultaTitleRow'>
                 <Col>
@@ -18,29 +23,31 @@ function Consulta(){
                     <Link to='/citas'><button className="finCons">Terminar Consulta</button></Link>
                 </Col>
             </Row>
-            <Row className='buttons'>
-                <Col>
+            <Row className='consData'>
+                <Col xs={0} md={3}></Col>
+                <Col xs={12} md={6} className='pacDataCol'>
                     <Row>
                         <Col>
-                            <h2>Datos de Consulta</h2>
+                            <h2 className='pacData'>Datos de Consulta</h2>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <p>Cita ID: </p>
+                            <p className='pacData'>Cita ID: {id}</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <p>Nombre del Paciente: </p>
+                            <p className='pacData'>Nombre del Paciente: {cita.Paciente}</p>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
-                            <p>Tipo de Cita:</p>
+                            <p className='pacData'>Tipo de Cita: {cita.TipoCita}</p>
                         </Col>
                     </Row>
                 </Col>
+                <Col xs={0} md={3}></Col>
             </Row>
             <Row>
                 <Col>

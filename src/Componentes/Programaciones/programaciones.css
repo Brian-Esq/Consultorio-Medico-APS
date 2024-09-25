@@ -12,6 +12,28 @@
     box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
     border-color: rgb(39, 196, 224);
     border-radius: 20px;
+    height: 13rem;
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 500px) {
+  .card {
+      width: 15rem;
+  }
+}
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 501px) and (max-width: 992px) {
+  .card {
+      width: 20rem;
+  }
+}
+
+/* Para pantallas grandes (escritorios) */
+@media (min-width: 993px) {
+  .card {
+      width: 25rem;
+  }
 }
 
 .initCons{
@@ -23,8 +45,8 @@
     height: 35px;
     border-radius: 10px;
     font-size: 15px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     border-color: rgb(39, 196, 224);
     float: left;
   }
@@ -32,4 +54,5 @@
   .progData{
     float: left;
     margin: 0;
+    font-size: 15px;
   }

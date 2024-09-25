@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
 import './programaciones.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 interface ProgramacionesProps {
     id: number,
@@ -17,6 +17,12 @@ interface ProgramacionesProps {
 }
 
 const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCita, Asistencia, Paciente, Empleado }) => {
+    const navigate = useNavigate();
+    const handleConsulta = (cita: ProgramacionesProps) => {
+        navigate(`/consulta/${cita.id}`, { state: { cita } });
+    };
+    const cita = { id, fecha, hora, TipoCita, Asistencia, Paciente, Empleado };
+
     return (
         <Container className="progsPage">
             <Row>
@@ -50,7 +56,7 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
                             </Row>
                             <Row>
                                 <Col>
-                                    <Link to='/consulta'><button className="initCons">Iniciar Consulta</button></Link>
+                                    <Button className="initCons" onClick={() => handleConsulta(cita)}>Iniciar Consulta</Button>
                                 </Col>
                             </Row>
                         </Card.Body>

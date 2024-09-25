@@ -17,3 +17,19 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+.navBotones{
+  background-color: rgb(39, 196, 224);
+  border: none;
+  color: black; 
+}
+
+.navBotones:disabled{
+  background-color: gray;
+  border: none;
+  color: white;
+}
+
+.vistaCitas{
+  height: 29rem;
+}
