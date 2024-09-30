@@ -33,3 +33,17 @@
 .vistaCitas{
   height: 29rem;
 }
+
+.dateInput{
+  box-sizing: border-box;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filtrarCitasText{
+  font-size: 20px;
+  font-weight: 700;
+  color: black;
+}

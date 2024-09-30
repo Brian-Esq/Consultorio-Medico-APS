@@ -21,12 +21,12 @@ const ITEMS_PER_PAGE = 2;
 
 function Citas() {
     const [currentPage, setCurrentPage] = useState(1);
-    const navigate = useNavigate();
+    const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
     const citas: CitaMedica[] = [
         {
             id: 1,
-            fecha: '2021-09-01',
+            fecha: '2024-09-01',
             hora: '10:00',
             TipoCita: 'Consulta',
             Asistencia: true,
@@ -35,7 +35,7 @@ function Citas() {
         },
         {
             id: 2,
-            fecha: '2021-09-02',
+            fecha: '2024-09-02',
             hora: '11:00',
             TipoCita: 'Consulta',
             Asistencia: false,
@@ -44,7 +44,7 @@ function Citas() {
         },
         {
             id: 3,
-            fecha: '2021-09-03',
+            fecha: '2024-09-03',
             hora: '12:00',
             TipoCita: 'Consulta',
             Asistencia: true,
@@ -53,7 +53,7 @@ function Citas() {
         },
         {
             id: 4,
-            fecha: '2021-09-04',
+            fecha: '2024-09-04',
             hora: '13:00',
             TipoCita: 'Consulta',
             Asistencia: true,
@@ -62,7 +62,7 @@ function Citas() {
         },
         {
             id: 5,
-            fecha: '2021-09-05',
+            fecha: '2024-09-05',
             hora: '14:00',
             TipoCita: 'Operación',
             Asistencia: false,
@@ -71,11 +71,20 @@ function Citas() {
         }
     ];
 
+    const handleFilterCitas = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSelectedDate(event.target.value);
+        setCurrentPage(1); // Reset to first page when filtering
+    };
+
+    const filteredCitas = selectedDate
+        ? citas.filter(cita => cita.fecha === selectedDate)
+        : citas;
+
     const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
     const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-    const currentItems = citas.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = filteredCitas.slice(indexOfFirstItem, indexOfLastItem);
 
-    const totalPages = Math.ceil(citas.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(filteredCitas.length / ITEMS_PER_PAGE);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -89,10 +98,6 @@ function Citas() {
         }
     };
 
-    const handleConsulta = (cita: CitaMedica) => {
-        navigate(`/consulta/${cita.id}`, { state: { cita } });
-    };
-
     return (
         <Container className='citasPage'>
             <Row className='citasTitleRow'>
@@ -101,8 +106,19 @@ function Citas() {
                 </Col>
             </Row>
             <Row>
-                <Col xs={2} md={3} xxl={4}></Col>
-                <Col xs={8} md={6} xxl={4} className='vistaCitas'>
+                <Col xs={12} xxl={4} className='dateCol'>
+                    <h1 className='filtrarCitasText'>Citas por Día</h1>
+                    <br/>
+                    <label style={{marginRight:'10px'}}>Fecha: </label>
+                    <input
+                        type='date'
+                        name='dateTime'
+                        autoComplete='off'
+                        className='dateInput'
+                        onChange={handleFilterCitas}
+                    />
+                </Col>
+                <Col xs={12} xxl={4} className='vistaCitas'>
                     {currentItems.map(cita => (
                         <Row key={cita.id} className='citasBodyRows'>
                             <Col>
@@ -119,7 +135,7 @@ function Citas() {
                         </Row>
                     ))}
                 </Col>
-                <Col xs={2} md={3} xxl={4}></Col>
+                <Col xs={12} xxl={4}></Col>
             </Row>
             <Row className='paginationRow'>
                 <Col xs={2} md={3} xxl={4}></Col>
