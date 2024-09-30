@@ -11,35 +11,43 @@ interface Prescription {
     comentarios: string;
 }
 
-function PrescriptionComponent() {
+interface PrescriptionComponentProps {
+    onPrescriptionsChange: (prescriptions: Prescription[]) => void;
+}
+
+function PrescriptionComponent({ onPrescriptionsChange }: PrescriptionComponentProps) {
     const [prescriptions, setPrescriptions] = useState<Prescription[]>([]);
+
+    const handleFormSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+        ev.preventDefault();
+        const target = ev.target as HTMLFormElement;
+        const padecimiento = (target.elements.namedItem('padecimiento') as HTMLInputElement).value;
+        const tratamiento = (target.elements.namedItem('tratamiento') as HTMLInputElement).value;
+        const duracion = (target.elements.namedItem('duracion') as HTMLInputElement).value;
+        const comentarios = (target.elements.namedItem('comentarios') as HTMLInputElement).value;
+
+        if (padecimiento && tratamiento && duracion && comentarios) {
+            const newPrescription: Prescription = {
+                padecimiento,
+                tratamiento,
+                duracion,
+                comentarios,
+            };
+            const updatedPrescriptions = [...prescriptions, newPrescription];
+            setPrescriptions(updatedPrescriptions);
+            onPrescriptionsChange(updatedPrescriptions); // Llamar al callback con las nuevas prescripciones
+            target.reset();
+        } else {
+            alert('Por favor, complete todos los campos.');
+        }
+    };
 
     return (
         <Container className='prescriptionPage'>
             <Row>
                 <Col xs={0} md={3}></Col>
                 <Col xs={12} md={6} className='formColumn'>
-                    <form onSubmit={ev => {
-                        ev.preventDefault();
-                        const target = ev.target as HTMLFormElement;
-                        const padecimiento = (target.elements.namedItem('padecimiento') as HTMLInputElement).value;
-                        const tratamiento = (target.elements.namedItem('tratamiento') as HTMLInputElement).value;
-                        const duracion = (target.elements.namedItem('duracion') as HTMLInputElement).value;
-                        const comentarios = (target.elements.namedItem('comentarios') as HTMLInputElement).value;
-
-                        if (padecimiento && tratamiento && duracion && comentarios) {
-                            const newPrescription: Prescription = {
-                                padecimiento,
-                                tratamiento,
-                                duracion,
-                                comentarios,
-                            };
-                            setPrescriptions([...prescriptions, newPrescription]);
-                            target.reset();
-                        } else {
-                            alert('Por favor, complete todos los campos.');
-                        }
-                    }} className='presForms'>
+                    <form onSubmit={handleFormSubmit} className='presForms'>
                         <Row className='formRows'>
                             <Col>
                                 <h1>Añadir Padecimiento</h1>

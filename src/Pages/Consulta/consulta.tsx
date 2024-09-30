@@ -2,17 +2,22 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './consulta.css';
-import { Link } from "react-router-dom";
 import Prescription from '../../Componentes/Prescription/prescription';
 import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { parse } from 'path';
 
 interface Consulta {
     ComGenerales: string;
     Costo: number;
+}
+
+interface Prescription {
+    padecimiento: string;
+    tratamiento: string;
+    duracion: string;
+    comentarios: string;
 }
 
 function Consulta() {
@@ -23,6 +28,11 @@ function Consulta() {
     const [costo, setCosto] = useState('');
     const [comentariosGen, setComentariosGen] = useState('');
     const navigate = useNavigate();
+    
+    const [prescriptions, setPrescriptions] = useState<Prescription[]>([]);
+    const handlePrescriptionsChange = (newPrescriptions: Prescription[]) => {
+        setPrescriptions(newPrescriptions);
+    };
 
     const handleSubmit = () => {
         if (costo && comentariosGen) {
@@ -36,7 +46,7 @@ function Consulta() {
             setConsulta([...consultas, newConsulta]);
             setCosto('');
             setComentariosGen('');
-            alert(newConsulta.ComGenerales + '\n' + newConsulta.Costo);
+            postData(cita.Paciente, cita.TipoCita, flCosto, comentariosGen, prescriptions);
             navigate('/citas');
         } else {
             alert('Por favor, complete todos los campos.');
@@ -53,7 +63,8 @@ function Consulta() {
             </Row>
             <Row className='buttons'>
                 <Col>
-                    <Button className="finCons" type='button' onClick={handleSubmit}>Terminar Consulta</Button>
+                    <Button className="finConsul" type='button' variant="outline-danger" 
+                    onClick={handleSubmit}>Terminar Consulta</Button>
                 </Col>
             </Row>
             <Row className='consData'>
@@ -84,7 +95,7 @@ function Consulta() {
             </Row>
             <Row>
                 <Col>
-                    <Prescription />
+                    <Prescription onPrescriptionsChange={handlePrescriptionsChange}/>
                 </Col>
             </Row>
             <Row>
@@ -122,6 +133,10 @@ function Consulta() {
             </Row>
         </Container>
     )
+
+    function postData(docName: string, tipoCita: string, costo: number, comentariosGen: string, prescriptions: Prescription[]) {
+        alert(docName + '\n' + tipoCita + '\n' + costo + '\n' + comentariosGen + '\n \nReceta: \n' + prescriptions.map(p => p.padecimiento + ' ' + p.tratamiento + ' ' + p.duracion + ' ' + p.comentarios).join('\n'));
+    }
 }
 
 export default Consulta;

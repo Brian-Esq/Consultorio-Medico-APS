@@ -16,7 +16,7 @@
 .consData{
   margin-bottom: 20px;
 }
-  .finCons{
+  .finConsul{
     background-color: red;
     font-weight: bold;
     font-family: 'Nunito Sans', sans-serif;
@@ -37,12 +37,6 @@
 
   .pacData{
     float: left;
-  }
-
-  .pacDataCol{
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
   }
 
   .styled-input-general{
