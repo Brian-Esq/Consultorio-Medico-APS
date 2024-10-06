@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './citas.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
