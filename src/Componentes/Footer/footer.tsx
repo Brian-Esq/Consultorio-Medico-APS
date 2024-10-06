@@ -9,11 +9,9 @@ function Footer(){
         <div className="footer">
             <Container fluid>
                 <Row>
-                    <Row><p></p></Row>
-                    <Col xs={6} className="txt">
+                    <Col className="txt">
                         <p>Todos los derechos reservados ©</p>
                     </Col>
-                    <Col xs={6}></Col>
                 </Row>
             </Container>
         </div>

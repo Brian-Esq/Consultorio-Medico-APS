@@ -33,6 +33,10 @@
     margin-bottom: 20px;
 }
 
+.expInfoText{
+    font-weight: bold;
+}
+
 .presCol {
     display: flex;
     justify-content: center;
@@ -42,25 +46,44 @@
 }
 
 .prescriptionTable {
-    margin: auto;
-    border-collapse: collapse;
-    width: 100%;
-    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: collapse;
 }
 
 .prescriptionTable th, .prescriptionTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #cbcbcb;
 }
 
 .prescriptionTable th {
-    background-color: grey;
-    font-weight: bold;
+  background-color: #cbcbcb;
+  font-weight: bold;
+  color: #333;
 }
 
 .prescriptionTable td {
-    background-color: white;
+  background-color: #fff;
+}
+
+.prescriptionTable th:first-child, .prescriptionTable td:first-child {
+  border-top-left-radius: 8px;
+}
+
+.prescriptionTable th:last-child, .prescriptionTable td:last-child {
+  border-top-right-radius: 8px;
+}
+
+.prescriptionTable tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.prescriptionTable tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
 }
 
 .styled-input {

@@ -5,7 +5,6 @@ import './consulta.css';
 import Prescription from '../../Componentes/Prescription/prescription';
 import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 interface Consulta {
@@ -63,13 +62,12 @@ function Consulta() {
             </Row>
             <Row className='buttons'>
                 <Col>
-                    <Button className="finConsul" type='button' variant="outline-danger" 
-                    onClick={handleSubmit}>Terminar Consulta</Button>
+                    <button className="finConsul" type='button' onClick={handleSubmit}>Terminar Consulta</button>
                 </Col>
             </Row>
             <Row className='consData'>
                 <Col xs={0} md={3}></Col>
-                <Col xs={12} md={6} className='pacDataCol'>
+                <Col xs={12} md={6}>
                     <Row>
                         <Col>
                             <h2 className='pacData'>Datos de Consulta</h2>
