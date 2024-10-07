@@ -43,6 +43,7 @@ function Expedientes() {
             const filterExp = expedientes.find(expediente => expediente.PacId === IDInt);
             if (filterExp) {
                 setExpediente(filterExp);
+                setID('');
             } else {
                 alert('Paciente no encontrado');
                 setID('');
@@ -67,8 +68,7 @@ function Expedientes() {
                     <Row>
                         <Col>
                             <label className='insertDataText'>Ingrese el ID del paciente: </label>
-                            <input 
-                                    name='costo'
+                            <input  name='InputDePaciente'
                                     autoComplete='off'
                                     className='inputPacID'
                                     value={ID}

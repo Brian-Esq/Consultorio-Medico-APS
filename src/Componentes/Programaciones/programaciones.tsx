@@ -21,6 +21,11 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
     const handleConsulta = (cita: ProgramacionesProps) => {
         navigate(`/consulta/${cita.id}`, { state: { cita } });
     };
+    const handleCncelacion = () => {
+        alert('La cita con el id ' + id + ' ha sido cancelada');
+    }
+
+
     const cita = { id, fecha, hora, TipoCita, Asistencia, Paciente, Empleado };
 
     return (
@@ -55,8 +60,11 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
                                 </Col>
                             </Row>
                             <Row>
-                                <Col>
+                                <Col xs={12} md={6}>
                                     <Button className="initCons" onClick={() => handleConsulta(cita)}>Iniciar Consulta</Button>
+                                </Col>
+                                <Col xs={12} md={6}>
+                                    <Button className="delCitaBut" onClick={() => handleCncelacion()} >Eliminar Cita</Button>
                                 </Col>
                             </Row>
                         </Card.Body>
