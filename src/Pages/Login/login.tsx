@@ -3,12 +3,29 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-function Login() {
+interface LoginProps {
+    onLogin: () => void;
+}
+
+const Login = ({ onLogin }: LoginProps) =>{
     const navigate = useNavigate();
+    const [User, setUser] = useState('');
+    const [Password, setPassword] = useState('');
     
     const handleLogin = () => {
-        navigate('/');
+        if(User && Password){
+            onLogin();
+            setUser('');
+            setPassword('');
+            navigate('/');
+        }
+        else{
+            setUser('');
+            setPassword('');
+            alert('Por favor ingrese un usuario y contraseña');
+        }
     }
     
     return (
@@ -35,7 +52,8 @@ function Login() {
                                     <input name='LoginUser'
                                         autoComplete='off'
                                         className='inputLogin'
-                                        inputMode='numeric'
+                                        value={User}
+                                        onChange={(e) => setUser(e.target.value)}
                                     />
                                 </Col>
                             </Row>
@@ -47,7 +65,8 @@ function Login() {
                                     <input name='LoginUser'
                                         autoComplete='off'
                                         className='inputLogin'
-                                        inputMode='numeric'
+                                        value={Password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Col>
                             </Row>

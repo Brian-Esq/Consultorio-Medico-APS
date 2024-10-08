@@ -72,7 +72,7 @@ function Expedientes() {
                                     autoComplete='off'
                                     className='inputPacID'
                                     value={ID}
-                                     onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
+                                    onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
                                     pattern='[0-9]*'
                                     inputMode='numeric'
                             />
