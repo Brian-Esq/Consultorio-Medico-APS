@@ -5,13 +5,21 @@ import './header.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function Header(){
-    return(
+interface LogoutProps {
+    onLogout: () => void;
+}
+
+const Header = ({ onLogout }: LogoutProps) => {
+    const handleLogout = () => {
+        onLogout();
+    }
+    
+    return (
         <div className="App-header">
             <Navbar collapseOnSelect expand="xl">
                 <Container fluid>
-                <Navbar.Brand href='/'><p className='brandName'>MediSys</p></Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                    <Navbar.Brand href='/'><p className='brandName'>MediSys</p></Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto resNavBar">
                             <Nav.Link href='/citas' className="underline-link"><p className='navWords'>Citas</p></Nav.Link >
@@ -24,7 +32,9 @@ function Header(){
                                 <Col xs={12}>
                                     <Row>
                                         <Col>
-                                            <Nav.Link className="logoutNav" href='/login'><button className="logoutBot">Log Out</button></Nav.Link>
+                                            <Nav.Link className="logoutNav" href='/login'>
+                                                <button className="logoutBot" onClick={handleLogout}>Log Out</button>
+                                            </Nav.Link>
                                         </Col>
                                     </Row>
                                 </Col>

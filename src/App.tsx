@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Consulta from './Pages/Consulta/consulta';
@@ -15,13 +15,22 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    // Leer el estado de autenticación de localStorage al cargar la aplicación
+    const authStatus = localStorage.getItem('isAuthenticated');
+    if (authStatus === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleLogin = () => {
-    // Aquí puedes agregar la lógica de autenticación
     setIsAuthenticated(true);
+    localStorage.setItem('isAuthenticated', 'true'); // Guardar el estado en localStorage
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem('isAuthenticated'); // Eliminar el estado de localStorage
   };
 
   return (
@@ -29,7 +38,7 @@ function App() {
       <BrowserRouter>
         {isAuthenticated ? (
           <>
-            <Header />
+            <Header onLogout={handleLogout} />
             <div className="mainCont">
               <Routes>
                 <Route path="/" element={<Home />} />
