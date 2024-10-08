@@ -60,10 +60,10 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
                                 </Col>
                             </Row>
                             <Row>
-                                <Col xs={12} md={6}>
+                                <Col xs={12} sm={6}>
                                     <Button className="initCons" onClick={() => handleConsulta(cita)}>Iniciar Consulta</Button>
                                 </Col>
-                                <Col xs={12} md={6}>
+                                <Col xs={12} sm={6}>
                                     <Button className="delCitaBut" onClick={() => handleCncelacion()} >Eliminar Cita</Button>
                                 </Col>
                             </Row>

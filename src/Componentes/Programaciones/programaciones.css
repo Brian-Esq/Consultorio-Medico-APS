@@ -12,7 +12,6 @@
     box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
     border-color: rgb(39, 196, 224);
     border-radius: 20px;
-    height: 13rem;
 }
 
 /* Para pantallas pequeñas (móviles) */
@@ -25,7 +24,7 @@
 /* Para pantallas medianas (tabletas) */
 @media (min-width: 501px) and (max-width: 992px) {
   .card {
-      width: 20rem;
+      width: 22rem;
   }
 }
 
