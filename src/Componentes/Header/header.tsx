@@ -33,7 +33,7 @@ const Header = ({ onLogout }: LogoutProps) => {
                                     <Row>
                                         <Col>
                                             <Nav.Link className="logoutNav" href='/login'>
-                                                <button className="logoutBot" onClick={handleLogout}>Log Out</button>
+                                                <button className="logoutBot" onClick={handleLogout}>Cerrar Sesión</button>
                                             </Nav.Link>
                                         </Col>
                                     </Row>
