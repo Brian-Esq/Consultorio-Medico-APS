@@ -18,6 +18,11 @@ const Login = ({ onLogin }: LoginProps) => {
     const [ConfNewPass, setConfNewPass] = useState('');
     const [isCreatingAccount, setIsCreatingAccount] = useState(false);
 
+    const validateEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     const handleLogin = () => {
         if (User && Password) {
             onLogin();
@@ -37,14 +42,22 @@ const Login = ({ onLogin }: LoginProps) => {
 
     const handleCreateAccount = () => {
         if (NewUser && NewPass && ConfNewPass) {
-            if (NewPass === ConfNewPass) {
-                alert('Cuenta creada exitosamente');
-                setIsCreatingAccount(false);
+            if (validateEmail(NewUser)) {
+                if (NewPass === ConfNewPass) {
+                    alert('Cuenta creada exitosamente');
+                    setIsCreatingAccount(false);
+                    setNewUser('');
+                    setNewPass('');
+                    setConfNewPass('');
+                } else {
+                    alert('Las contraseñas no coinciden');
+                    setNewPass('');
+                    setConfNewPass('');
+                }
+            }
+            else {
+                alert('Por favor ingrese un correo válido');
                 setNewUser('');
-                setNewPass('');
-                setConfNewPass('');
-            } else {
-                alert('Las contraseñas no coinciden');
                 setNewPass('');
                 setConfNewPass('');
             }
