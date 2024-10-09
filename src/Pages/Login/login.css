@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.welcomeLogin {
+    font-weight: 800;
+    color: rgb(25, 16, 152);
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}
+
+.sysTitleLogin {
+    font-weight: 800;
+    color: rgb(4, 2, 33);
+    text-align: center;
+    font-size: 30px;
+    margin: 5px 30px;
+}
+
+.LoginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.mainLoginRow {
+    text-align: center;
+}
+
+.loginCard {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.LoginText {
+    float: left;
+}
+
+.inputLogin {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.loginFields {
+    margin-bottom: 15px;
+}
+
+.LoginBut {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(40, 139, 204);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204);
+    float: none;
+}
+
+.LoginBut:hover,
+.LoginBut:active,
+.LoginBut:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(40, 139, 204) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204) !important;
+    float: none;
+}
+
+.createAccBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(21, 177, 122);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122);
+    float: none;
+}
+
+.createAccBot:hover,
+.createAccBot:active,
+.createAccBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(21, 177, 122) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122) !important;
+    float: none;
+}
+
+.buttonsRow {
+    margin-top: 20px;
+}

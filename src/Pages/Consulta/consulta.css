@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.consultaTitleRow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.consTitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}
+
+.consData{
+  margin-bottom: 20px;
+}
+  .finConsul{
+    background-color: red;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
+    width: 200px;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 17px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .buttons{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .pacData{
+    float: left;
+  }
+
+  .styled-input-general{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+  }
+
+  .generalDataRows{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .comentariosGen{
+    width: 100%;
+    float: left;
+    resize: none;
+    height: 100px;
+  }

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.expInfoText{
+    float: left;
+    margin: 0;
+    font-size: 15px;
+    margin: 5px 0;
+  }
+
+.expedienteEspecificoComp{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.padecimientosTable {
+  margin: auto;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  border-collapse: collapse;
+  margin-top: 10px;
+  float: left;
+}
+
+.padecimientosTable th, .padecimientosTable td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #cbcbcb;
+}
+
+.padecimientosTable th {
+  background-color: #cbcbcb;
+  font-weight: bold;
+  color: #333;
+}
+
+.padecimientosTable td {
+  background-color: #fff;
+}
+
+.padecimientosTable th:first-child, .padecimientosTable td:first-child {
+  border-top-left-radius: 8px;
+}
+
+.padecimientosTable th:last-child, .padecimientosTable td:last-child {
+  border-top-right-radius: 8px;
+}
+
+.padecimientosTable tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.padecimientosTable tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}

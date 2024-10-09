@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.progsPage{
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background-color: white;
+    width: 20rem;
+    text-align: center;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    border-color: rgb(39, 196, 224);
+    border-radius: 20px;
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 500px) {
+  .card {
+      width: 15rem;
+  }
+}
+
+/* Para pantallas medianas (tabletas) */
+@media (min-width: 501px) and (max-width: 992px) {
+  .card {
+      width: 22rem;
+  }
+}
+
+/* Para pantallas grandes (escritorios) */
+@media (min-width: 993px) {
+  .card {
+      width: 25rem;
+  }
+}
+
+.initCons{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(39, 196, 224);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(39, 196, 224);
+    float: none;
+  }
+
+.initCons:hover,
+.initCons:active,
+.initCons:focus{
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(39, 196, 224) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(39, 196, 224) !important;
+    float: none;
+  }
+
+.delCitaBut{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: red;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: red;
+    float: none;
+  }
+
+.delCitaBut:hover,
+.delCitaBut:active,
+.delCitaBut:focus {
+    color: white !important;
+    font-weight: bold !important;
+    font-family: 'Nunito Sans', sans-serif !important;
+    background-color: red !important;
+    width: 150px !important;
+    height: 35px !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    border-color: red !important;
+    float: none !important;
+}
+
+  .progData{
+    float: left;
+    margin: 0;
+    font-size: 15px;
+  }

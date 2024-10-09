@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+/*
+Footer
+*/
+
+.footer {
+    background-color: #474747;
+    font-family: 'Nunito Sans', sans-serif;
+    padding: 10px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin-top: auto;
+  }
+  
+  .footer p{
+    color: white;
+    font-size: 17px;
+  }
+  
+  .footer .txt{
+    margin-top: 15px;
+    display: flex;
+    justify-content: left;
+  }
