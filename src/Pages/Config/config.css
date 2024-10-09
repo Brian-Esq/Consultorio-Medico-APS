@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.settingsTitleRow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.settingsTitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}

@@ -96,6 +96,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                                 autoComplete='off'
                                                 className='inputLogin'
                                                 value={NewUser}
+                                                required
                                                 onChange={(e) => setNewUser(e.target.value)}
                                             />
                                         </Col>
@@ -108,6 +109,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                             <input name='NewPass'
                                                 autoComplete='off'
                                                 className='inputLogin'
+                                                required
                                                 value={NewPass}
                                                 onChange={(e) => setNewPass(e.target.value)}
                                             />
@@ -121,6 +123,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                             <input name='ConfNewPass'
                                                 autoComplete='off'
                                                 className='inputLogin'
+                                                required
                                                 value={ConfNewPass}
                                                 onChange={(e) => setConfNewPass(e.target.value)}
                                             />
@@ -137,6 +140,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                             <input name='LoginUser'
                                                 autoComplete='off'
                                                 className='inputLogin'
+                                                required
                                                 value={User}
                                                 onChange={(e) => setUser(e.target.value)}
                                             />
@@ -150,6 +154,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                             <input name='LoginPass'
                                                 autoComplete='off'
                                                 className='inputLogin'
+                                                required
                                                 value={Password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                             />

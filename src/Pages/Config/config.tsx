@@ -1,10 +1,18 @@
 import './config.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { useState } from 'react';
 
 function Settings(){
     return(
-        <div>
-            <p>Este es el Configuración</p>
-        </div>
+        <Container className='SettingsPage'>
+            <Row className='settingsTitleRow'>
+                <Col>
+                    <h1 className='settingsTitle'>Configuración</h1>
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
