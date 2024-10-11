@@ -79,3 +79,71 @@
     border-color: rgb(40, 139, 204) !important;
     float: none;
 }
+
+.canAddDocBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(177, 70, 21);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21);
+    float: none;
+}
+
+.canAddDocBot:hover,
+.canAddDocBot:active,
+.canAddDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(177, 70, 21) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21) !important;
+    float: none;
+}
+
+.nextDocBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(21, 177, 122);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122);
+    float: none;
+}
+
+.nextDocBot:hover,
+.nextDocBot:active,
+.nextDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(21, 177, 122)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122) !important;
+    float: none;
+}
+
+.selBotRow{
+    margin-top: 20px;
+}
