@@ -1,74 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './citas.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Programaciones from '../../Componentes/Programaciones/programaciones';
-
-interface CitaMedica {
-    id: number,
-    fecha: string,
-    hora: string,
-    TipoCita: string,
-    Asistencia: boolean,
-    Paciente: string,
-    Empleado: string
-}
+import { getCitas, CitaMedica } from './citasService';
 
 const ITEMS_PER_PAGE = 2;
 
 function Citas() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
+    const [citas, setCitas] = useState<CitaMedica[]>([]);
 
-    const citas: CitaMedica[] = [
-        {
-            id: 1,
-            fecha: '2024-09-01',
-            hora: '10:00',
-            TipoCita: 'Consulta',
-            Asistencia: true,
-            Paciente: 'Brian',
-            Empleado: 'Eustace'
-        },
-        {
-            id: 2,
-            fecha: '2024-09-02',
-            hora: '11:00',
-            TipoCita: 'Consulta',
-            Asistencia: false,
-            Paciente: 'Alice',
-            Empleado: 'John'
-        },
-        {
-            id: 3,
-            fecha: '2024-09-03',
-            hora: '12:00',
-            TipoCita: 'Consulta',
-            Asistencia: true,
-            Paciente: 'Charlie',
-            Empleado: 'Doe'
-        },
-        {
-            id: 4,
-            fecha: '2024-09-04',
-            hora: '13:00',
-            TipoCita: 'Consulta',
-            Asistencia: true,
-            Paciente: 'David',
-            Empleado: 'Smith'
-        },
-        {
-            id: 5,
-            fecha: '2024-09-05',
-            hora: '14:00',
-            TipoCita: 'Operación',
-            Asistencia: false,
-            Paciente: 'Eve',
-            Empleado: 'Johnson'
-        }
-    ];
+    useEffect(() => {
+        const fetchCitas = async () => {
+            const citasData = await getCitas();
+            setCitas(citasData);
+        };
+
+        fetchCitas();
+    }, []);
 
     const handleFilterCitas = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(event.target.value);
@@ -150,7 +103,7 @@ function Citas() {
                 <Col xs={2} md={3} xxl={4}></Col>
             </Row>
         </Container>
-    )
+    );
 }
 
 export default Citas;

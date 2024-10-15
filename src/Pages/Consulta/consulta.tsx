@@ -132,8 +132,34 @@ function Consulta() {
         </Container>
     )
 
-    function postData(docName: string, tipoCita: string, costo: number, comentariosGen: string, prescriptions: Prescription[]) {
-        alert(docName + '\n' + tipoCita + '\n' + costo + '\n' + comentariosGen + '\n \nReceta: \n' + prescriptions.map(p => p.padecimiento + ' ' + p.tratamiento + ' ' + p.duracion + ' ' + p.comentarios).join('\n'));
+    async function postData(docName: string, tipoCita: string, costo: number, comentariosGen: string, prescriptions: Prescription[]) {
+        const url = 'https://your-backend-api.com/endpoint'; // Replace with your backend API URL
+        const data = {
+            docName,
+            tipoCita,
+            costo,
+            comentariosGen,
+            prescriptions
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log('Success:', responseData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 }
 
