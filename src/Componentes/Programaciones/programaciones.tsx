@@ -5,28 +5,30 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { getCitas, CitaMedica,deleteCita } from '../../Pages/Citas/citasService';
 
 interface ProgramacionesProps {
     id: number,
     fecha: string,
     hora: string,
     TipoCita: string,
-    Asistencia: boolean,
+    asistencia: string,
     Paciente: string,
     Empleado: string
 }
 
-const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCita, Asistencia, Paciente, Empleado }) => {
+const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCita, asistencia, Paciente, Empleado }) => {
     const navigate = useNavigate();
     const handleConsulta = (cita: ProgramacionesProps) => {
         navigate(`/consulta/${cita.id}`, { state: { cita } });
     };
-    const handleCncelacion = () => {
+    const handleCncelacion = (id:number) => {
+        deleteCita(id);
         alert('La cita con el id ' + id + ' ha sido cancelada');
     }
 
 
-    const cita = { id, fecha, hora, TipoCita, Asistencia, Paciente, Empleado };
+    const cita = { id, fecha, hora, TipoCita, asistencia, Paciente, Empleado };
 
     return (
         <Container className="progsPage">
@@ -64,7 +66,7 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
                                     <Button className="initCons" onClick={() => handleConsulta(cita)}>Iniciar Consulta</Button>
                                 </Col>
                                 <Col xs={12} sm={6}>
-                                    <Button className="delCitaBut" onClick={() => handleCncelacion()} >Eliminar Cita</Button>
+                                    <Button className="delCitaBut" onClick={() => handleCncelacion(cita.id)} >Eliminar Cita</Button>
                                 </Col>
                             </Row>
                         </Card.Body>

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Programaciones from '../../Componentes/Programaciones/programaciones';
-import { getCitas, CitaMedica } from './citasService';
+import { getCitas, CitaMedica,deleteCita } from './citasService';
 
 const ITEMS_PER_PAGE = 2;
 
@@ -78,10 +78,10 @@ function Citas() {
                                     id={cita.id}
                                     fecha={cita.fecha}
                                     hora={cita.hora}
-                                    TipoCita={cita.TipoCita}
-                                    Asistencia={cita.Asistencia}
-                                    Paciente={cita.Paciente}
-                                    Empleado={cita.Empleado}
+                                    TipoCita={cita.tipoCita}
+                                    asistencia={cita.asistencia}
+                                    Paciente={cita.nombrePaciente + ' ' + cita.aPaternoPaciente + ' ' + cita.aMaternoPaciente}
+                                    Empleado={cita.nombreEmpleado + ' ' + cita.aPaternoEmpleado + ' ' + cita.aMaternoEmpleado}
                                 />
                             </Col>
                         </Row>
