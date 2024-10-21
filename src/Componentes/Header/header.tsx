@@ -25,6 +25,7 @@ const Header = ({ onLogout }: LogoutProps) => {
                             <Nav.Link href='/citas' className="underline-link"><p className='navWords'>Citas</p></Nav.Link >
                             <Nav.Link href='/expedientes' className="underline-link"><p className='navWords'>Expendientes</p></Nav.Link >
                             <Nav.Link href='/reportes' className="underline-link"><p className='navWords'>Reportes</p></Nav.Link >
+                            <Nav.Link href='/inventario' className="underline-link"><p className='navWords'>Inventario</p></Nav.Link >
                             <Nav.Link href='/config' className="underline-link"><p className='navWords'>Configuración</p></Nav.Link >
                         </Nav>
                         <Nav>

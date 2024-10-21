@@ -10,6 +10,7 @@ import Settings from './Pages/Config/config';
 import Reportes from './Pages/Reportes/reportes';
 import Login from './Pages/Login/login';
 import Expedientes from './Pages/Expedientes/expedientes';
+import Inventario from './Pages/Inventario/inventario';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/config" element={<Settings />} />
                 <Route path="/reportes" element={<Reportes />} />
                 <Route path="/expedientes" element={<Expedientes />} />
+                <Route path="/inventario" element={<Inventario />} />
                 <Route path="*" element={<Home />} />
               </Routes>
             </div>

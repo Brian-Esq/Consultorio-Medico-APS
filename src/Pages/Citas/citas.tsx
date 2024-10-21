@@ -5,7 +5,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Programaciones from '../../Componentes/Programaciones/programaciones';
-import { getCitas, CitaMedica,deleteCita } from './citasService';
+//Cambiar para pruebas
+import {CitaMedica,getCitasArray } from './citasService';
+// import {CitaMedica,getCitas } from './citasService';
 
 const ITEMS_PER_PAGE = 2;
 
@@ -14,9 +16,20 @@ function Citas() {
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [citas, setCitas] = useState<CitaMedica[]>([]);
 
+
+    /*Solo para pruebas básicas y que no truene la app*/
+    // useEffect(() => {
+    //     const fetchCitas = async () => {
+    //         const citasData = await getCitas();
+    //         setCitas(citasData);
+    //     };
+
+    //     fetchCitas();
+    // }, []);
+
     useEffect(() => {
         const fetchCitas = async () => {
-            const citasData = await getCitas();
+            const citasData = getCitasArray();
             setCitas(citasData);
         };
 

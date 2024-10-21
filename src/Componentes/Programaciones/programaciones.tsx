@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { getCitas, CitaMedica,deleteCita } from '../../Pages/Citas/citasService';
+// import { deleteCita } from '../../Pages/Citas/citasService';
 
 interface ProgramacionesProps {
     id: number,
@@ -23,7 +23,7 @@ const Programaciones: React.FC<ProgramacionesProps> = ({ id, fecha, hora, TipoCi
         navigate(`/consulta/${cita.id}`, { state: { cita } });
     };
     const handleCncelacion = (id:number) => {
-        deleteCita(id);
+        // deleteCita(id);
         alert('La cita con el id ' + id + ' ha sido cancelada');
     }
 
