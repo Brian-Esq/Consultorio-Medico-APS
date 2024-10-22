@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Consulta from './Pages/Consulta/consulta';
@@ -11,27 +11,46 @@ import Reportes from './Pages/Reportes/reportes';
 import Login from './Pages/Login/login';
 import Expedientes from './Pages/Expedientes/expedientes';
 import Inventario from './Pages/Inventario/inventario';
+import HeaderPac from './Componentes/HeaderPac/headerPac';
 import "bootstrap/dist/css/bootstrap.min.css";
+
+interface User {
+  user: string;
+}
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isPatient, setIsPatient] = useState(false);
 
   useEffect(() => {
     // Leer el estado de autenticación de localStorage al cargar la aplicación
     const authStatus = localStorage.getItem('isAuthenticated');
+    const userType = localStorage.getItem('userType');
     if (authStatus === 'true') {
       setIsAuthenticated(true);
+      if (userType === 'Paciente') {
+        setIsPatient(true);
+      }
     }
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (user: User) => {
     setIsAuthenticated(true);
+    if (user.user.toLowerCase() === 'paciente') {
+      setIsPatient(true);
+      localStorage.setItem('userType', 'Paciente');
+    } else {
+      setIsPatient(false);
+      localStorage.setItem('userType', 'Doctor');
+    }
     localStorage.setItem('isAuthenticated', 'true'); // Guardar el estado en localStorage
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setIsPatient(false);
     localStorage.removeItem('isAuthenticated'); // Eliminar el estado de localStorage
+    localStorage.removeItem('userType'); // Eliminar el tipo de usuario de localStorage
   };
 
   return (
@@ -39,20 +58,35 @@ function App() {
       <BrowserRouter>
         {isAuthenticated ? (
           <>
-            <Header onLogout={handleLogout} />
-            <div className="mainCont">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/consulta/:id" element={<Consulta />} />
-                <Route path="/citas" element={<Citas />} />
-                <Route path="/config" element={<Settings />} />
-                <Route path="/reportes" element={<Reportes />} />
-                <Route path="/expedientes" element={<Expedientes />} />
-                <Route path="/inventario" element={<Inventario />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            </div>
-            <Footer />
+            {isPatient ? (
+              <>
+                <HeaderPac onLogout={handleLogout} />
+                <div className="mainCont">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="*" element={<Home />} />
+                  </Routes>
+                </div>
+                <Footer />
+              </>
+            ) : (
+              <>
+                <Header onLogout={handleLogout} />
+                <div className="mainCont">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/consulta/:id" element={<Consulta />} />
+                    <Route path="/citas" element={<Citas />} />
+                    <Route path="/config" element={<Settings />} />
+                    <Route path="/reportes" element={<Reportes />} />
+                    <Route path="/expedientes" element={<Expedientes />} />
+                    <Route path="/inventario" element={<Inventario />} />
+                    <Route path="*" element={<Home />} />
+                  </Routes>
+                </div>
+                <Footer />
+              </>
+            )}
           </>
         ) : (
           <Login onLogin={handleLogin} />

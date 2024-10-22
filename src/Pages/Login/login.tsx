@@ -5,8 +5,12 @@ import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+interface User{
+    user: string;
+}
+
 interface LoginProps {
-    onLogin: () => void;
+    onLogin: (user:User) => void;
 }
 
 const Login = ({ onLogin }: LoginProps) => {
@@ -25,7 +29,8 @@ const Login = ({ onLogin }: LoginProps) => {
 
     const handleLogin = () => {
         if (User && Password) {
-            onLogin();
+            const user: User = { user: User };
+            onLogin(user);
             setUser('');
             setPassword('');
             navigate('/');
