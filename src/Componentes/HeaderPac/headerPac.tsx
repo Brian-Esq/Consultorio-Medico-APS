@@ -22,9 +22,9 @@ const HeaderPac = ({ onLogout }: LogoutProps) => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto resNavBar">
-                            <Nav.Link className="underline-link"><p className='navWords'>Nueva Cita</p></Nav.Link >
-                            <Nav.Link className="underline-link"><p className='navWords'>Mis Citas</p></Nav.Link >
-                            <Nav.Link className="underline-link"><p className='navWords'>Mi Perfil</p></Nav.Link >
+                            <Nav.Link href='nuevacita' className="underline-link"><p className='navWords'>Nueva Cita</p></Nav.Link >
+                            <Nav.Link href='miscitas' className="underline-link"><p className='navWords'>Mis Citas</p></Nav.Link >
+                            <Nav.Link href='perfil' className="underline-link"><p className='navWords'>Mi Perfil</p></Nav.Link >
                         </Nav>
                         <Nav>
                             <Row>

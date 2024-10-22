@@ -12,6 +12,9 @@ import Login from './Pages/Login/login';
 import Expedientes from './Pages/Expedientes/expedientes';
 import Inventario from './Pages/Inventario/inventario';
 import HeaderPac from './Componentes/HeaderPac/headerPac';
+import NuevaCita from './PatPages/NuevaCita/nuevacita';
+import MisCitas from './PatPages/MisCitas/miscitas';
+import Perfil from './PatPages/PerfilPac/perfil';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 interface User {
@@ -64,6 +67,9 @@ function App() {
                 <div className="mainCont">
                   <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/nuevacita" element={<NuevaCita />} />
+                    <Route path="/miscitas" element={<MisCitas />} />
+                    <Route path="/perfil" element={<Perfil />} />
                     <Route path="*" element={<Home />} />
                   </Routes>
                 </div>
