@@ -45,7 +45,8 @@ function Consulta() {
             setConsulta([...consultas, newConsulta]);
             setCosto('');
             setComentariosGen('');
-            postData(cita.Paciente, cita.TipoCita, flCosto, comentariosGen, prescriptions);
+            console.log(cita.id, cita.TipoCita, flCosto, comentariosGen);
+            postData(cita.id, cita.TipoCita, flCosto, comentariosGen, prescriptions);
             navigate('/citas');
         } else {
             alert('Por favor, complete todos los campos.');
@@ -132,14 +133,12 @@ function Consulta() {
         </Container>
     )
 
-    async function postData(docName: string, tipoCita: string, costo: number, comentariosGen: string, prescriptions: Prescription[]) {
-        const url = 'https://your-backend-api.com/endpoint'; // Replace with your backend API URL
+    async function postData(cita_Id: number, procedimiento: string, costo: number, comentarios: string, detalles: Prescription[]) {
+        const url = 'https://localhost:7215/api/Consulta/ConsultaYDetalle'; // Replace with your backend API URL
+        const consulta = {cita_Id,procedimiento,costo,comentarios}
         const data = {
-            docName,
-            tipoCita,
-            costo,
-            comentariosGen,
-            prescriptions
+            consulta,
+            detalles
         };
 
         try {
