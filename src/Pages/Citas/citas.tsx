@@ -6,8 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Programaciones from '../../Componentes/Programaciones/programaciones';
 //Cambiar para pruebas
-// import {CitaMedica,getCitasArray } from './citasService';
-import {CitaMedica,getCitas } from './citasService';
+import {CitaMedica,getCitasArray } from './citasService';
+// import {CitaMedica,getCitas } from './citasService';
 
 const ITEMS_PER_PAGE = 2;
 
@@ -18,23 +18,23 @@ function Citas() {
 
 
     /*Solo para pruebas básicas y que no truene la app*/
-    useEffect(() => {
-        const fetchCitas = async () => {
-            const citasData = await getCitas();
-            setCitas(citasData);
-        };
-
-        fetchCitas();
-    }, []);
-
     // useEffect(() => {
     //     const fetchCitas = async () => {
-    //         const citasData = getCitasArray();
+    //         const citasData = await getCitas();
     //         setCitas(citasData);
     //     };
 
     //     fetchCitas();
     // }, []);
+
+    useEffect(() => {
+        const fetchCitas = async () => {
+            const citasData = getCitasArray();
+            setCitas(citasData);
+        };
+
+        fetchCitas();
+    }, []);
 
     const handleFilterCitas = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(event.target.value);

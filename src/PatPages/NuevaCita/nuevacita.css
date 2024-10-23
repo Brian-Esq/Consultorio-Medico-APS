@@ -12,3 +12,25 @@
     font-size: 40px;
     margin: 5px 30px;
 }
+
+.select{
+    max-width: 100%;
+}
+
+.rowNuevaCitaSelect{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.nuevaCitaForm{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.formHora{
+    margin-top: 20px;
+}
