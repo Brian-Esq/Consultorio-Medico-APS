@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import { CitasDisp, getCitasDispArray } from './nuevaCitaService';
 
 function NuevaCita() {
     const [doctores, setDoctores] = useState<{ nombre: string; horas: string[] }[]>([]);
@@ -40,20 +41,20 @@ function NuevaCita() {
                 <Col xs={12} md={4} className='rowNuevaCitaSelect'>
                     <Form className='nuevaCitaForm'>
                         <Form.Group controlId="formDoctor">
-                            <Form.Label>Selecciona un Doctor</Form.Label>
+                            <Form.Label>Seleccione un Doctor</Form.Label>
                             <Form.Control as="select" value={doctorSeleccionado} onChange={(e) => setDoctorSeleccionado(e.target.value)} 
                             className='select'>
-                                <option value="">Selecciona un doctor</option>
+                                <option value="">Seleccione un doctor</option>
                                 {doctores.map((doctor, index) => (
                                     <option key={index} value={doctor.nombre}>{doctor.nombre}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group controlId="formHora" className='formHora'>
-                            <Form.Label>Selecciona una Hora</Form.Label>
+                            <Form.Label>Seleccione una Hora</Form.Label>
                             <Form.Control as="select" value={horaSeleccionada} onChange={(e) => setHoraSeleccionada(e.target.value)} 
                             disabled={!doctorSeleccionado} className='select'>
-                                <option value="">Selecciona una hora</option>
+                                <option value="">Seleccione una hora</option>
                                 {horasDisponibles.map((hora, index) => (
                                     <option key={index} value={hora}>{hora}</option>
                                 ))}
