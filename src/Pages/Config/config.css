@@ -147,3 +147,40 @@
 .selBotRow{
     margin-top: 20px;
 }
+
+.inputDocID{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.searchDocBut{
+    background-color: rgb(9, 9, 86);
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 17px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.docEspCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.docNotFoundText{
+    margin: 20px;
+    font-size: 15px;
+}

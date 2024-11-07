@@ -3,6 +3,16 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
+import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
+
+interface DoctorInfo {
+    Id: number,
+    Nombres: string,
+    Apellidos: string,
+    CURP: string,
+    RFC: string,
+    NSS: string
+}
 
 function Settings() {
     const [addNewDoctor, setAddNewDoctor] = useState(false);
@@ -15,6 +25,27 @@ function Settings() {
     const [docEmail, setDocEmail] = useState('');
     const [docPass, setDocPass] = useState('');
     const [docPassConf, setDocPassConf] = useState('');
+    const [ID, setID] = useState('');
+    const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
+
+    const doctores: DoctorInfo[] = [
+        {
+            Id: 1,
+            Nombres: 'Armando Esteban',
+            Apellidos: 'Broncas Sánchez',
+            CURP: 'BOSA980123HDFRNR00',
+            RFC: 'BOSA980123123',
+            NSS: '123456789'
+        },
+        {
+            Id: 2,
+            Nombres: 'Juan Manuelas',
+            Apellidos: 'Pérez López',
+            CURP: 'PELJ980123HDFRNR00',
+            RFC: 'PELJ980123123',
+            NSS: '987654321'
+        },
+    ]
 
     const handleAddDoctor = () => {
         setAddNewDoctor(!addNewDoctor);
@@ -30,17 +61,17 @@ function Settings() {
     }
 
     const handleKeepAdding = () => {
-        if(docName && docLastName && docCURP && docRFC && docNSS){
+        if (docName && docLastName && docCURP && docRFC && docNSS) {
             setKeepAdding(!keepAdding);
-        } else{
+        } else {
             alert('Por favor llene todos los campos');
         }
     }
 
     const handleFinishAdding = () => {
-        if(docEmail && docPass && docPassConf){
-            if(validateEmail(docEmail)){
-                if(docPass === docPassConf){
+        if (docEmail && docPass && docPassConf) {
+            if (validateEmail(docEmail)) {
+                if (docPass === docPassConf) {
                     alert('Doctor agregado exitosamente \n\n Datos: \n\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
                     setAddNewDoctor(false);
                     setKeepAdding(false);
@@ -52,7 +83,7 @@ function Settings() {
                     setDocEmail('');
                     setDocPass('');
                     setDocPassConf('');
-                } else{
+                } else {
                     alert('Las contraseñas no coinciden');
                 }
             } else {
@@ -60,6 +91,24 @@ function Settings() {
             }
         } else {
             alert('Por favor llene todos los campos');
+        }
+    }
+
+    const handleSubmit = () => {
+        if (ID) {
+            let IDInt = parseInt(ID)
+            const filterDoc = doctores.find(doc => doc.Id === IDInt);
+            if (filterDoc) {
+                setDoctor(filterDoc);
+                setID('');
+            } else {
+                alert('Doctor no encontrado');
+                setID('');
+                setDoctor(null);
+            }
+        } else {
+            alert('Ingrese un valor válido de búsqueda por ID');
+            setID('');
         }
     }
 
@@ -235,6 +284,54 @@ function Settings() {
                             )}
                         </>
                     )}
+                </Col>
+                <Col xs={0} md={3}></Col>
+            </Row>
+            <Row>
+                <Col xs={0} md={3}></Col>
+                <Col xs={12} md={6} className='addDoctorCol'>
+                    <Row className='insertDataRow'>
+                        <Col xs={0} md={1}></Col>
+                        <Col xs={12} md={10}>
+                            <Row>
+                                <Col>
+                                    <label className='insertDataText'>Ingrese el ID del doctor: </label>
+                                    <input name='InputDeDoctor'
+                                        autoComplete='off'
+                                        className='inputDocID'
+                                        value={ID}
+                                        onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
+                                        pattern='[0-9]*'
+                                        inputMode='numeric'
+                                    />
+                                </Col >
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <button className='searchDocBut' type='button' onClick={handleSubmit}>Buscar</button>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col xs={0} md={1}></Col>
+                    </Row>
+                    <Row>
+                        <Col xs={0} md={1}></Col>
+                        <Col xs={12} md={10}>
+                            {doctor ? (
+                                <DocInfo
+                                    Id={doctor.Id}
+                                    Nombres={doctor.Nombres}
+                                    Apellidos={doctor.Apellidos}
+                                    CURP={doctor.CURP}
+                                    RFC={doctor.RFC}
+                                    NSS={doctor.NSS}
+                                />
+                            ) : (
+                                <p className='docNotFoundText'>Ingrese un ID de paciente existente para encontrar un expediente</p>
+                            )}
+                        </Col>
+                        <Col xs={0} md={1}></Col>
+                    </Row>
                 </Col>
                 <Col xs={0} md={3}></Col>
             </Row>
