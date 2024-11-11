@@ -88,7 +88,7 @@ function Settings() {
         }
     }
 
-    const handleSubmit = () => {
+    const handleSearchDocID = () => {
         if (ID) {
             let IDInt = parseInt(ID)
             const filterDoc = doctores.find(doc => doc.Id === IDInt);
@@ -321,7 +321,7 @@ function Settings() {
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <button className='searchDocBut' type='button' onClick={handleSubmit}>Buscar</button>
+                                            <button className='searchDocBut' type='button' onClick={handleSearchDocID}>Buscar</button>
                                         </Col>
                                     </Row>
                                 </Col>
