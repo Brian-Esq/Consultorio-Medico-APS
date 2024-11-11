@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import './header.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import pildora from '../../img/pildora.png';
 
 interface LogoutProps {
     onLogout: () => void;
@@ -18,7 +19,7 @@ const Header = ({ onLogout }: LogoutProps) => {
         <div className="App-header">
             <Navbar collapseOnSelect expand="xl">
                 <Container fluid>
-                    <Navbar.Brand href='/'><p className='brandName'>MediSys</p></Navbar.Brand>
+                <Navbar.Brand href='/'><img src={pildora} className="App-logo" alt="logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto resNavBar">

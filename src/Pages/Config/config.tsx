@@ -11,7 +11,7 @@ interface DoctorInfo {
     Apellidos: string,
     CURP: string,
     RFC: string,
-    NSS: string
+    NSS: string,
 }
 
 function Settings() {
@@ -27,25 +27,9 @@ function Settings() {
     const [docPassConf, setDocPassConf] = useState('');
     const [ID, setID] = useState('');
     const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
-
-    const doctores: DoctorInfo[] = [
-        {
-            Id: 1,
-            Nombres: 'Armando Esteban',
-            Apellidos: 'Broncas Sánchez',
-            CURP: 'BOSA980123HDFRNR00',
-            RFC: 'BOSA980123123',
-            NSS: '123456789'
-        },
-        {
-            Id: 2,
-            Nombres: 'Juan Manuelas',
-            Apellidos: 'Pérez López',
-            CURP: 'PELJ980123HDFRNR00',
-            RFC: 'PELJ980123123',
-            NSS: '987654321'
-        },
-    ]
+    const [searchDoctor, setSearchDoctor] = useState(false);
+    const [doctores, setDoctores] = useState<DoctorInfo[]>([]);
+    const [nextId, setNextId] = useState(1); // Initial ID
 
     const handleAddDoctor = () => {
         setAddNewDoctor(!addNewDoctor);
@@ -72,7 +56,17 @@ function Settings() {
         if (docEmail && docPass && docPassConf) {
             if (validateEmail(docEmail)) {
                 if (docPass === docPassConf) {
-                    alert('Doctor agregado exitosamente \n\n Datos: \n\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
+                    const newDoctor: DoctorInfo = {
+                        Id: nextId,
+                        Nombres: docName,
+                        Apellidos: docLastName,
+                        CURP: docCURP,
+                        RFC: docRFC,
+                        NSS: docNSS
+                    };
+                    setDoctores([...doctores, newDoctor]);
+                    setNextId(nextId + 1); // Increment the ID for the next doctor
+                    alert('Doctor agregado exitosamente \n\n Datos: \n\nID :' + nextId + '\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
                     setAddNewDoctor(false);
                     setKeepAdding(false);
                     setDocName('');
@@ -116,6 +110,12 @@ function Settings() {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     };
+
+    const handleSearchDoctor = () => {
+        setSearchDoctor(!searchDoctor);
+        setID('');
+        setDoctor(null);
+    }
 
     return (
         <Container className='SettingsPage'>
@@ -290,48 +290,71 @@ function Settings() {
             <Row>
                 <Col xs={0} md={3}></Col>
                 <Col xs={12} md={6} className='addDoctorCol'>
-                    <Row className='insertDataRow'>
-                        <Col xs={0} md={1}></Col>
-                        <Col xs={12} md={10}>
-                            <Row>
-                                <Col>
-                                    <label className='insertDataText'>Ingrese el ID del doctor: </label>
-                                    <input name='InputDeDoctor'
-                                        autoComplete='off'
-                                        className='inputDocID'
-                                        value={ID}
-                                        onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
-                                        pattern='[0-9]*'
-                                        inputMode='numeric'
-                                    />
-                                </Col >
+                    {searchDoctor ? (
+                        <>
+                            <Row className='insertDataRow'>
+                                <Col xs={0} md={1}></Col>
+                                <Col xs={12} md={10}>
+                                    <Row>
+                                        <Col>
+                                            <label className='insertDataText'>Ingrese el ID del doctor: </label>
+                                            <input name='InputDeDoctor'
+                                                autoComplete='off'
+                                                className='inputDocID'
+                                                value={ID}
+                                                onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
+                                                pattern='[0-9]*'
+                                                inputMode='numeric'
+                                            />
+                                        </Col >
+                                    </Row>
+                                    <Row>
+                                        <Col>
+                                            <button className='searchDocBut' type='button' onClick={handleSubmit}>Buscar</button>
+                                        </Col>
+                                    </Row>
+                                </Col>
+                                <Col xs={0} md={1}></Col>
                             </Row>
                             <Row>
+                                <Col xs={0} md={1}></Col>
+                                <Col xs={12} md={10}>
+                                    {doctor ? (
+                                        <DocInfo
+                                            Id={doctor.Id}
+                                            Nombres={doctor.Nombres}
+                                            Apellidos={doctor.Apellidos}
+                                            CURP={doctor.CURP}
+                                            RFC={doctor.RFC}
+                                            NSS={doctor.NSS}
+                                        />
+                                    ) : (
+                                        <p className='docNotFoundText'>Ingrese un ID de doctor existente para encontrar un expediente</p>
+                                    )}
+                                </Col>
+                                <Col xs={0} md={1}></Col>
+                            </Row>
+                            <Row className='botRowSett'>
                                 <Col>
-                                    <button className='searchDocBut' type='button' onClick={handleSubmit}>Buscar</button>
+                                    <button className='canAddDocBot' onClick={handleSearchDoctor}>Cancelar</button>
                                 </Col>
                             </Row>
-                        </Col>
-                        <Col xs={0} md={1}></Col>
-                    </Row>
-                    <Row>
-                        <Col xs={0} md={1}></Col>
-                        <Col xs={12} md={10}>
-                            {doctor ? (
-                                <DocInfo
-                                    Id={doctor.Id}
-                                    Nombres={doctor.Nombres}
-                                    Apellidos={doctor.Apellidos}
-                                    CURP={doctor.CURP}
-                                    RFC={doctor.RFC}
-                                    NSS={doctor.NSS}
-                                />
-                            ) : (
-                                <p className='docNotFoundText'>Ingrese un ID de paciente existente para encontrar un expediente</p>
-                            )}
-                        </Col>
-                        <Col xs={0} md={1}></Col>
-                    </Row>
+                        </>
+                    ) : (
+                        <>
+                            <Row className='selBotRow'>
+                                <Col>
+                                    <p>Seleccione el botón para buscar un doctor por ID</p>
+                                </Col>
+                            </Row>
+                            <Row className='botRowSett'>
+                                <Col>
+                                    <button className='addDocBot' onClick={handleSearchDoctor}>Buscar Doctor</button>
+                                </Col>
+                            </Row>
+                        </>
+                    )}
+
                 </Col>
                 <Col xs={0} md={3}></Col>
             </Row>

@@ -5,6 +5,10 @@
     font-family: 'Nunito Sans', sans-serif;
   }
 
+.App-logo{
+    height: 80px;
+  }
+
 .navWords{
     font-weight: 800;
     color: whitesmoke;
