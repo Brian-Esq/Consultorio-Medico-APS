@@ -66,7 +66,7 @@ function Settings() {
                     };
                     setDoctores([...doctores, newDoctor]);
                     setNextId(nextId + 1); // Increment the ID for the next doctor
-                    alert('Doctor agregado exitosamente \n\n Datos: \n\nID :' + nextId + '\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
+                    alert('Doctor agregado exitosamente \n\n Datos: \n\nID: ' + nextId + '\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
                     setAddNewDoctor(false);
                     setKeepAdding(false);
                     setDocName('');
@@ -117,6 +117,17 @@ function Settings() {
         setDoctor(null);
     }
 
+    const handleSuspendDoctor = () => {
+        if (doctor) {
+            const espDoc = doctores.filter(doc => doc.Id !== doctor.Id);
+            setDoctores(espDoc);
+            setDoctor(null);
+            alert('Doctor suspendido exitosamente');
+        } else {
+            alert('No se ha seleccionado un doctor para suspender');
+        }
+    }
+
     return (
         <Container className='SettingsPage'>
             <Row className='settingsTitleRow'>
@@ -136,7 +147,7 @@ function Settings() {
                             </Row>
                             <Row className='botRowSett'>
                                 <Col>
-                                    <button className='addDocBot' onClick={handleAddDoctor}>Crear Cuenta</button>
+                                    <button className='addDocBot' onClick={handleAddDoctor}>Agregar Doctor</button>
                                 </Col>
                             </Row>
                         </>
@@ -337,6 +348,9 @@ function Settings() {
                             <Row className='botRowSett'>
                                 <Col>
                                     <button className='canAddDocBot' onClick={handleSearchDoctor}>Cancelar</button>
+                                </Col>
+                                <Col>
+                                    <button className='suspDocBot' onClick={handleSuspendDoctor}>Suspender</button>
                                 </Col>
                             </Row>
                         </>

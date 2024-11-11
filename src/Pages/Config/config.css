@@ -144,6 +144,38 @@
     float: none;
 }
 
+.suspDocBot{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(205, 160, 61);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61);
+    float: none;
+}
+
+.suspDocBot:hover,
+.suspDocBot:active,
+.suspDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(205, 160, 61)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61) !important;
+    float: none;
+}
+
 .selBotRow{
     margin-top: 20px;
 }

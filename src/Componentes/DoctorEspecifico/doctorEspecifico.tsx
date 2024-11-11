@@ -48,6 +48,12 @@ const DoctorEspecifico: React.FC<DoctorInfo> = ({ Id, Nombres, Apellidos, CURP, 
                     <p className='docInfoText'>NSS: {expediente.NSS}</p>
                 </Col>
             </Row>
+            <Row>
+                <Col>
+                <br />
+                    <p className='docInfoText' style={{color:'red'}}>AVISO: Si selecciona el botón de suspender, se suspenderá al doctor {expediente.Nombres} con ID {expediente.Id}</p>
+                </Col>
+            </Row>
         </Container>
     )
 }
