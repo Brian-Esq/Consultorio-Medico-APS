@@ -6,11 +6,7 @@ import Prescription from '../../Componentes/Prescription/prescription';
 import { useLocation, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-interface Consulta {
-    ComGenerales: string;
-    Costo: number;
-}
+import { ConsultaInt, finishConsulta } from './consultaService';
 
 interface Prescription {
     padecimiento: string;
@@ -23,7 +19,7 @@ function Consulta() {
     const { id } = useParams();
     const location = useLocation();
     const { cita } = location.state;
-    const [consultas, setConsulta] = useState<Consulta[]>([]);
+    const [consultas, setConsulta] = useState<ConsultaInt[]>([]);
     const [costo, setCosto] = useState('');
     const [comentariosGen, setComentariosGen] = useState('');
     const navigate = useNavigate();
@@ -38,7 +34,7 @@ function Consulta() {
             var flCosto = parseFloat(costo);
             
             //Guarda los valores y se usarán más adelante para enviar al backend (El objeto newConsulta con sus campos)
-            const newConsulta: Consulta = {
+            const newConsulta: ConsultaInt = {
                 ComGenerales: comentariosGen,
                 Costo: flCosto,
             };
@@ -46,7 +42,9 @@ function Consulta() {
             setCosto('');
             setComentariosGen('');
             console.log(cita.id, cita.TipoCita, flCosto, comentariosGen);
-            postData(cita.id, cita.TipoCita, flCosto, comentariosGen, prescriptions);
+            //Método post para enviar los datos al backend
+            finishConsulta(cita.id, cita.TipoCita, flCosto, comentariosGen, prescriptions);
+            alert('Consulta finalizada con éxito.');
             navigate('/citas');
         } else {
             alert('Por favor, complete todos los campos.');
@@ -132,34 +130,6 @@ function Consulta() {
             </Row>
         </Container>
     )
-
-    async function postData(cita_Id: number, procedimiento: string, costo: number, comentarios: string, detalles: Prescription[]) {
-        const url = 'https://localhost:7215/api/Consulta/ConsultaYDetalle'; // Replace with your backend API URL
-        const consulta = {cita_Id,procedimiento,costo,comentarios}
-        const data = {
-            consulta,
-            detalles
-        };
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const responseData = await response.json();
-            console.log('Success:', responseData);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
 }
 
 export default Consulta;

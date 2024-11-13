@@ -4,15 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
+import { DoctorInfo, getEspecificDoc } from './configService';
 
-interface DoctorInfo {
-    Id: number,
-    Nombres: string,
-    Apellidos: string,
-    CURP: string,
-    RFC: string,
-    NSS: string,
-}
 
 function Settings() {
     const [addNewDoctor, setAddNewDoctor] = useState(false);
