@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
-import { DoctorInfo, getEspecificDoc } from './configService';
+import { DoctorInfo, getEspecificDoc, postDoctor } from './configService';
 
 
 function Settings() {
@@ -55,7 +55,8 @@ function Settings() {
                         Apellidos: docLastName,
                         CURP: docCURP,
                         RFC: docRFC,
-                        NSS: docNSS
+                        NSS: docNSS,
+                        Activo: true
                     };
                     setDoctores([...doctores, newDoctor]);
                     setNextId(nextId + 1); // Increment the ID for the next doctor
@@ -112,8 +113,17 @@ function Settings() {
 
     const handleSuspendDoctor = () => {
         if (doctor) {
+            /*Cambiar a que solo filtre el doctor que se busca suspender para luego mandar al método putDoctor
+            Usar lo siguiente cuando esté conectado al backend:
+
+            const espDoc = doctores.filter(doc => doc.Id === doctor.Id);
+            espDoc[0].Activo = false;
+            putDoctor(espDoc[0]);
+            */
             const espDoc = doctores.filter(doc => doc.Id !== doctor.Id);
             setDoctores(espDoc);
+
+            //Apartir de esto no reemplazar
             setDoctor(null);
             alert('Doctor suspendido exitosamente');
         } else {
