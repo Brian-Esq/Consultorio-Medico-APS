@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.misCitasTitleRow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.misCitasTitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}
+
+.citasPatBodyRows{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .navPatBotones{
+    background-color: rgb(39, 196, 224);
+    border: none;
+    color: black; 
+  }
+  
+  .navPatBotones:disabled{
+    background-color: gray;
+    border: none;
+    color: white;
+  }
+  
+  .vistaPatCitas{
+    height: 29rem;
+  }
+  
+  .datePatInput{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .filtrarPatCitasText{
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+  }
+  
+  /* Para pantallas pequeñas (móviles) */
+  @media (max-width: 500px) {
+    .vistaPatCitas {
+        height: 36rem;
+    }
+  }
+  
+  /* Para pantallas medianas (tabletas) */
+  @media (min-width: 501px) and (max-width: 992px) {
+    .vistaPatCitas {
+        height: 36rem;
+    }
+  }
+  
+  /* Para pantallas grandes (escritorios) */
+  @media (min-width: 993px) {
+    .vistaPatCitas {
+        height: 29rem;
+    }
+  }

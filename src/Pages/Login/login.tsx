@@ -5,29 +5,75 @@ import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-interface LoginProps {
-    onLogin: () => void;
+interface User{
+    user: string;
 }
 
-const Login = ({ onLogin }: LoginProps) =>{
+interface LoginProps {
+    onLogin: (user:User) => void;
+}
+
+const Login = ({ onLogin }: LoginProps) => {
     const navigate = useNavigate();
     const [User, setUser] = useState('');
     const [Password, setPassword] = useState('');
-    
+    const [NewUser, setNewUser] = useState('');
+    const [NewPass, setNewPass] = useState('');
+    const [ConfNewPass, setConfNewPass] = useState('');
+    const [isCreatingAccount, setIsCreatingAccount] = useState(false);
+
+    const validateEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+    };
+
     const handleLogin = () => {
-        if(User && Password){
-            onLogin();
+        if (User && Password) {
+            const user: User = { user: User };
+            onLogin(user);
             setUser('');
             setPassword('');
             navigate('/');
-        }
-        else{
+        } else {
             setUser('');
             setPassword('');
             alert('Por favor ingrese un usuario y contraseña');
         }
     }
-    
+
+    const toggleCreateAccount = () => {
+        setIsCreatingAccount(!isCreatingAccount);
+    }
+
+    const handleCreateAccount = () => {
+        if (NewUser && NewPass && ConfNewPass) {
+            if (validateEmail(NewUser)) {
+                if (NewPass === ConfNewPass) {
+                    alert('Cuenta creada exitosamente');
+                    setIsCreatingAccount(false);
+                    setNewUser('');
+                    setNewPass('');
+                    setConfNewPass('');
+                } else {
+                    alert('Las contraseñas no coinciden');
+                    setNewPass('');
+                    setConfNewPass('');
+                }
+            }
+            else {
+                alert('Por favor ingrese un correo válido');
+                setNewUser('');
+                setNewPass('');
+                setConfNewPass('');
+            }
+        } else {
+            alert('Por favor llene todos los campos');
+            setNewUser('');
+            setNewPass('');
+            setConfNewPass('');
+        }
+    }
+
     return (
         <Container className='LoginPage'>
             <Row className='mainLoginRow'>
@@ -44,40 +90,103 @@ const Login = ({ onLogin }: LoginProps) =>{
                     </Row>
                     <Row>
                         <Col className='loginCard'>
-                            <Row>
-                                <Col className='loginFields'>
-                                    <label className='LoginText'>Usuario: </label>
-                                </Col>
-                                <Col>
-                                    <input name='LoginUser'
-                                        autoComplete='off'
-                                        className='inputLogin'
-                                        value={User}
-                                        onChange={(e) => setUser(e.target.value)}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <label className='LoginText'>Contraseña: </label>
-                                </Col>
-                                <Col>
-                                    <input name='LoginUser'
-                                        autoComplete='off'
-                                        className='inputLogin'
-                                        value={Password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                    />
-                                </Col>
-                            </Row>
-                            <Row className='buttonsRow'>
-                                <Col>
-                                    <button className='createAccBot'>Crear Cuenta</button>
-                                </Col>
-                                <Col>
-                                    <button className='LoginBut' onClick={() => handleLogin()}>Iniciar Sesión</button>
-                                </Col>
-                            </Row>
+                            {isCreatingAccount ? (
+                                <>
+                                    <Row>
+                                        <Col className='loginFields'>
+                                            <label className='LoginText'>Correo: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='NewUser'
+                                                autoComplete='off'
+                                                className='inputLogin'
+                                                value={NewUser}
+                                                required
+                                                onChange={(e) => setNewUser(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='loginFields'>
+                                            <label className='LoginText'>Contraseña: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='NewPass'
+                                                autoComplete='off'
+                                                className='inputLogin'
+                                                required
+                                                value={NewPass}
+                                                onChange={(e) => setNewPass(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='loginFields'>
+                                            <label className='LoginText'>Confirmar contraseña: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='ConfNewPass'
+                                                autoComplete='off'
+                                                className='inputLogin'
+                                                required
+                                                value={ConfNewPass}
+                                                onChange={(e) => setConfNewPass(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </>
+                            ) : (
+                                <>
+                                    <Row>
+                                        <Col className='loginFields'>
+                                            <label className='LoginText'>Correo: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='LoginUser'
+                                                autoComplete='off'
+                                                className='inputLogin'
+                                                required
+                                                value={User}
+                                                onChange={(e) => setUser(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='loginFields'>
+                                            <label className='LoginText'>Contraseña: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='LoginPass'
+                                                autoComplete='off'
+                                                className='inputLogin'
+                                                required
+                                                value={Password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </>
+                            )}
+                            {!isCreatingAccount && (
+                                <Row className='buttonsRow'>
+                                    <Col>
+                                        <button className='createAccBot' onClick={toggleCreateAccount}>Crear Cuenta</button>
+                                    </Col>
+                                    <Col>
+                                        <button className='LoginBut' onClick={handleLogin}>Iniciar Sesión</button>
+                                    </Col>
+                                </Row>
+                            )}
+                            {isCreatingAccount && (
+                                <Row className='buttonsRow'>
+                                    <Col>
+                                        <button className='cancelCreateAccBot' onClick={toggleCreateAccount}>Cancelar</button>
+                                    </Col>
+                                    <Col>
+                                        <button className='createAccBot' onClick={handleCreateAccount}>Crear Cuenta</button>
+                                    </Col>
+                                </Row>
+                            )}
                         </Col>
                     </Row>
                 </Col>

@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import './citas.css';
+import './miscitas.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Programaciones from '../../Componentes/Programaciones/programaciones';
+import ProgramacionesPat from '../../Componentes/PatProgs/patProgs';
 //Cambiar para pruebas
-import {CitaMedica,getCitasArray } from './citasService';
-// import {CitaMedica,getCitas } from './citasService';
+import {CitaMedica, getCitasArray } from './miscitasService';
+// import {CitaMedica,getCitas } from './miscitasService';
 
 const ITEMS_PER_PAGE = 2;
 
-function Citas() {
+function MisCitas() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [citas, setCitas] = useState<CitaMedica[]>([]);
-
 
     /*Solo para pruebas básicas y que no truene la app*/
     // useEffect(() => {
@@ -62,32 +61,32 @@ function Citas() {
             setCurrentPage(currentPage - 1);
         }
     };
-
+    
     return (
-        <Container className='citasPage'>
-            <Row className='citasTitleRow'>
+        <Container className='patCitasPage'>
+            <Row className='misCitasTitleRow'>
                 <Col>
-                    <h1 className='citasTitle'>Citas Programadas</h1>
+                    <h1 className='misCitasTitle'>Mis Citas</h1>
                 </Col>
             </Row>
             <Row>
-                <Col xs={12} xxl={4} className='dateCol'>
-                    <h1 className='filtrarCitasText'>Citas por Día</h1>
+                <Col xs={12} xxl={4} className='datePatCol'>
+                    <h1 className='filtrarPatCitasText'>Citas por Día</h1>
                     <br/>
                     <label style={{marginRight:'10px'}}>Fecha: </label>
                     <input
                         type='date'
                         name='dateTime'
                         autoComplete='off'
-                        className='dateInput'
+                        className='datePatInput'
                         onChange={handleFilterCitas}
                     />
                 </Col>
-                <Col xs={12} xxl={4} className='vistaCitas'>
+                <Col xs={12} xxl={4} className='vistaPatCitas'>
                     {currentItems.map(cita => (
-                        <Row key={cita.id} className='citasBodyRows'>
+                        <Row key={cita.id} className='citasPatBodyRows'>
                             <Col>
-                                <Programaciones
+                                <ProgramacionesPat
                                     id={cita.id}
                                     fecha={cita.fecha}
                                     hora={cita.hora}
@@ -102,21 +101,21 @@ function Citas() {
                 </Col>
                 <Col xs={12} xxl={4}></Col>
             </Row>
-            <Row className='paginationRow'>
+            <Row className='paginationPatRow'>
                 <Col xs={2} md={3} xxl={4}></Col>
                 <Col xs={8} md={6} xxl={4}>
-                    <Button onClick={handlePreviousPage} disabled={currentPage === 1} className='navBotones'>
+                    <Button onClick={handlePreviousPage} disabled={currentPage === 1} className='navPatBotones'>
                         &lt;
                     </Button>
                     <span>{` Página ${currentPage} de ${totalPages} `}</span>
-                    <Button onClick={handleNextPage} disabled={currentPage === totalPages} className='navBotones'>
+                    <Button onClick={handleNextPage} disabled={currentPage === totalPages} className='navPatBotones'>
                         &gt;
                     </Button>
                 </Col>
                 <Col xs={2} md={3} xxl={4}></Col>
             </Row>
         </Container>
-    );
+    )
 }
 
-export default Citas;
+export default MisCitas;

@@ -45,7 +45,8 @@ function Consulta() {
             setConsulta([...consultas, newConsulta]);
             setCosto('');
             setComentariosGen('');
-            postData(cita.Paciente, cita.TipoCita, flCosto, comentariosGen, prescriptions);
+            console.log(cita.id, cita.TipoCita, flCosto, comentariosGen);
+            postData(cita.id, cita.TipoCita, flCosto, comentariosGen, prescriptions);
             navigate('/citas');
         } else {
             alert('Por favor, complete todos los campos.');
@@ -132,8 +133,32 @@ function Consulta() {
         </Container>
     )
 
-    function postData(docName: string, tipoCita: string, costo: number, comentariosGen: string, prescriptions: Prescription[]) {
-        alert(docName + '\n' + tipoCita + '\n' + costo + '\n' + comentariosGen + '\n \nReceta: \n' + prescriptions.map(p => p.padecimiento + ' ' + p.tratamiento + ' ' + p.duracion + ' ' + p.comentarios).join('\n'));
+    async function postData(cita_Id: number, procedimiento: string, costo: number, comentarios: string, detalles: Prescription[]) {
+        const url = 'https://localhost:7215/api/Consulta/ConsultaYDetalle'; // Replace with your backend API URL
+        const consulta = {cita_Id,procedimiento,costo,comentarios}
+        const data = {
+            consulta,
+            detalles
+        };
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const responseData = await response.json();
+            console.log('Success:', responseData);
+        } catch (error) {
+            console.error('Error:', error);
+        }
     }
 }
 

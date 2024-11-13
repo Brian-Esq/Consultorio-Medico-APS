@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&display=swap');
+
+.settingsTitleRow{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.settingsTitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 30px;
+}
+
+.settingsSubtitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.addDoctorCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.settFields {
+    margin-bottom: 15px;
+}
+
+.inputDocSettings {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.settText{
+    float: right;
+    margin-left: 20px;
+}
+
+.addDocBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(40, 139, 204);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204);
+    float: none;
+}
+
+.addDocBot:hover,
+.addDocBot:active,
+.addDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(40, 139, 204) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204) !important;
+    float: none;
+}
+
+.canAddDocBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(177, 70, 21);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21);
+    float: none;
+}
+
+.canAddDocBot:hover,
+.canAddDocBot:active,
+.canAddDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(177, 70, 21) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21) !important;
+    float: none;
+}
+
+.nextDocBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(21, 177, 122);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122);
+    float: none;
+}
+
+.nextDocBot:hover,
+.nextDocBot:active,
+.nextDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(21, 177, 122)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122) !important;
+    float: none;
+}
+
+.suspDocBot{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(205, 160, 61);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61);
+    float: none;
+}
+
+.suspDocBot:hover,
+.suspDocBot:active,
+.suspDocBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(205, 160, 61)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61) !important;
+    float: none;
+}
+
+.selBotRow{
+    margin-top: 20px;
+}
+
+.inputDocID{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.searchDocBut{
+    background-color: rgb(9, 9, 86);
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 17px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.docEspCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.docNotFoundText{
+    margin: 20px;
+    font-size: 15px;
+}

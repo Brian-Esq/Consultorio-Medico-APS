@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import './header.css';
+import './headerPac.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import pildora from '../../img/pildora.png';
@@ -10,7 +10,7 @@ interface LogoutProps {
     onLogout: () => void;
 }
 
-const Header = ({ onLogout }: LogoutProps) => {
+const HeaderPac = ({ onLogout }: LogoutProps) => {
     const handleLogout = () => {
         onLogout();
     }
@@ -19,15 +19,13 @@ const Header = ({ onLogout }: LogoutProps) => {
         <div className="App-header">
             <Navbar collapseOnSelect expand="xl">
                 <Container fluid>
-                <Navbar.Brand href='/'><img src={pildora} className="App-logo" alt="logo" /></Navbar.Brand>
+                <Navbar.Brand href='/'><img src={pildora} className="App-logo-pac" alt="logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto resNavBar">
-                            <Nav.Link href='/citas' className="underline-link"><p className='navWords'>Citas</p></Nav.Link >
-                            <Nav.Link href='/expedientes' className="underline-link"><p className='navWords'>Expendientes</p></Nav.Link >
-                            <Nav.Link href='/reportes' className="underline-link"><p className='navWords'>Reportes</p></Nav.Link >
-                            <Nav.Link href='/inventario' className="underline-link"><p className='navWords'>Inventario</p></Nav.Link >
-                            <Nav.Link href='/config' className="underline-link"><p className='navWords'>Configuración</p></Nav.Link >
+                            <Nav.Link href='nuevacita' className="underline-link"><p className='navWords'>Nueva Cita</p></Nav.Link >
+                            <Nav.Link href='miscitas' className="underline-link"><p className='navWords'>Mis Citas</p></Nav.Link >
+                            <Nav.Link href='perfil' className="underline-link"><p className='navWords'>Mi Perfil</p></Nav.Link >
                         </Nav>
                         <Nav>
                             <Row>
@@ -49,4 +47,4 @@ const Header = ({ onLogout }: LogoutProps) => {
     )
 }
 
-export default Header;
+export default HeaderPac;

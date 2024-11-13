@@ -116,6 +116,38 @@
     float: none;
 }
 
+.cancelCreateAccBot{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(177, 70, 21);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21);
+    float: none;
+}
+
+.cancelCreateAccBot:hover,
+.cancelCreateAccBot:active,
+.cancelCreateAccBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(177, 70, 21) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21) !important;
+    float: none;
+}
+
 .buttonsRow {
     margin-top: 20px;
 }
