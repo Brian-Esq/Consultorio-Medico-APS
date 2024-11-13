@@ -4,38 +4,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import ExpedienteEspecifico from '../../Componentes/ExpedienteEspecifico/expedienteEspecifico';
+import { Expediente, getExpedientesArray } from './expedientesService';
+// import { Expediente, getExpedientes } from './expedientesService'; <-- Cambiar para pruebas
 
-interface Expediente {
-    PacId: number,
-    Altura: number,
-    Peso: number,
-    Alergias: string,
-    Genero: string,
-    Padecimientos: string[]
-}
 
 function Expedientes() {
     const [ID, setID] = useState('');
     const [expediente, setExpediente] = useState<Expediente | null>(null);
 
-    const expedientes: Expediente[] = [
-        {
-            PacId: 1,
-            Altura: 1.80,
-            Peso: 77,
-            Alergias: "Paracetamol, Piña",
-            Genero: "Hombre",
-            Padecimientos: ["Gripe", "Dolores de Cabeza"]
-        },
-        {
-            PacId: 2,
-            Altura: 1.50,
-            Peso: 60,
-            Alergias: "Cambios climáticos",
-            Genero: "Mujer",
-            Padecimientos: ["Fractura", "Irritamiento estomacal"]
-        },
-    ]
+    const expedientes = getExpedientesArray();
 
     const handleSubmit = () => {
         if (ID) {
@@ -68,13 +45,13 @@ function Expedientes() {
                     <Row>
                         <Col>
                             <label className='insertDataText'>Ingrese el ID del paciente: </label>
-                            <input  name='InputDePaciente'
-                                    autoComplete='off'
-                                    className='inputPacID'
-                                    value={ID}
-                                    onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
-                                    pattern='[0-9]*'
-                                    inputMode='numeric'
+                            <input name='InputDePaciente'
+                                autoComplete='off'
+                                className='inputPacID'
+                                value={ID}
+                                onChange={(e) => setID(e.target.value.replace(/\D/, ''))} // Reemplaza cualquier carácter no numérico
+                                pattern='[0-9]*'
+                                inputMode='numeric'
                             />
                         </Col >
                     </Row>
