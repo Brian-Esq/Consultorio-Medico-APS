@@ -4,7 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+//Para pruebas locales sin el backend
 import { CitasDisp, getCitasDispArray, TiposDeCita, getTiposCita, FechaYHora } from './nuevaCitaService';
+//Para cuando se conecte con el backend
+// import { getDoctores, getProcedimientos, getHorarios, postCita, TiposDeCita, getTiposCita, FechaYHora } from './nuevaCitaService';
 
 function NuevaCita() {
     const [citasDisp, setCitasDisp] = useState<CitasDisp[]>([]);
