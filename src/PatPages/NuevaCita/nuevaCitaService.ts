@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export interface FechaYHora{
     fecha: string;
     hora: string[];
@@ -12,7 +14,21 @@ export interface TiposDeCita{
     tipo: string;
 }
 
-//Solo para pruebas básicas y que no truene la app
+export interface CitaMedica {
+    id: number;
+    fecha: string;
+    hora: string;
+    tipoCita: string;
+    asistencia: string;
+    nombrePaciente: string;
+    nombreEmpleado: string;
+    aPaternoEmpleado: string;
+    aMaternoEmpleado: string;
+    aPaternoPaciente: string;
+    aMaternoPaciente: string;
+}
+
+//Solo para pruebas básicas sin backend y que no truene la app
 export const getCitasDispArray = () =>{
     const citasDisp : CitasDisp[] = [
         {
@@ -83,4 +99,49 @@ export const getTiposCita = () =>{
         }
     ]
     return tiposCita;
+}
+
+
+//Para conexión con el backend
+export const getDoctores = async (): Promise<string[]> => {
+    const response = await axios.get<string[]>('https://localhost:7215/api/Doctor');
+    return response.data;
+}
+
+export const getProcedimientos = async (): Promise<string[]> => {
+    const response = await axios.get<string[]>('https://localhost:7215/api/Procedimiento');
+    return response.data;
+}
+
+export const getHorarios = async (doctor: string, fecha: string): Promise<string[]> => {
+    const response = await axios.get<string[]>('https://localhost:7215/api/Doctor/' + doctor + '/' + fecha);
+    return response.data;
+}
+
+export const postCita = async (doctor: string, tipoCita: string, fecha: string, hora: string): Promise<void> => {
+    const cita: CitaMedica = {
+        id: 0,
+        fecha: fecha,
+        hora: hora,
+        tipoCita: tipoCita,
+        asistencia: "",
+        nombrePaciente: "",
+        nombreEmpleado: doctor,
+        aPaternoEmpleado: "",
+        aMaternoEmpleado: "",
+        aPaternoPaciente: "",
+        aMaternoPaciente: ""
+    }
+    
+    try {
+        const response = await axios.post('https://localhost:7215/api/Cita', cita);
+
+        if (response.status >= 200 && response.status < 300) {
+            console.log('Success:', response.statusText);
+        } else {
+            console.error('Error: Network response was not ok', response.status);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }

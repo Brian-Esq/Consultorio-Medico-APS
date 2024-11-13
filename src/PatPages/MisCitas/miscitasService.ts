@@ -12,7 +12,6 @@ export interface CitaMedica {
     aMaternoEmpleado: string;
     aPaternoPaciente: string;
     aMaternoPaciente: string;
-
 }
 
 
