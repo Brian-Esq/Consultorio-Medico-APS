@@ -12,3 +12,222 @@
     font-size: 40px;
     margin: 5px 30px;
 }
+
+.inventorySubtitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.inventorySearchSubtitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.addElementCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.invFields {
+    margin-bottom: 15px;
+}
+
+.inputElmInv {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.invText{
+    float: right;
+    margin-left: 20px;
+}
+
+.addElementBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(40, 139, 204);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204);
+    float: none;
+}
+
+.addElementBot:hover,
+.addElementBot:active,
+.addElementBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(40, 139, 204) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204) !important;
+    float: none;
+}
+
+.canAddElementBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(177, 70, 21);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21);
+    float: none;
+}
+
+.canAddElementBot:hover,
+.canAddElementBot:active,
+.canAddElementBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(177, 70, 21) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21) !important;
+    float: none;
+}
+
+.finishAddElmBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(21, 177, 122);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122);
+    float: none;
+}
+
+.finishAddElmBot:hover,
+.finishAddElmBot:active,
+.finishAddElmBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(21, 177, 122)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(21, 177, 122) !important;
+    float: none;
+}
+
+.suspElementBot{
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(205, 160, 61);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61);
+    float: none;
+}
+
+.suspElementBot:hover,
+.suspElementBot:active,
+.suspElementBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(205, 160, 61)!important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(205, 160, 61) !important;
+    float: none;
+}
+
+.selElBotRow{
+    margin-top: 20px;
+}
+
+.inputElementID{
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+    width: 20%;
+}
+
+.insertElementText{
+    float: left;
+    margin-right: 20px;
+}
+
+.searchElmBut{
+    background-color: rgb(9, 9, 86);
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    font-size: 17px;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.docEspCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.elementNotFoundText{
+    margin: 20px;
+    font-size: 15px;
+}

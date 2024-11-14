@@ -23,18 +23,18 @@ const ElementoEspecifico: React.FC<ElementoInfo> = ({ Id, Nombre, Cantidad }) =>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>Nombre: {expediente.Nombre}</p>
+                    <p className='invInfoText'>Nombre: {expediente.Nombre}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>Cantidad Disponible: {expediente.Cantidad}</p>
+                    <p className='invInfoText'>Cantidad Disponible: {expediente.Cantidad}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <br />
-                    <p className='docInfoText' style={{color:'red'}}>AVISO: Si selecciona el botón de quitar, se quitará el siguiente elemento: {expediente.Nombre}</p>
+                    <p className='invInfoText' style={{color:'red'}}>AVISO: Si selecciona el botón de retirar, se retirará el siguiente elemento: {expediente.Nombre}</p>
                 </Col>
             </Row>
         </Container>

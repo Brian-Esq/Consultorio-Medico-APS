@@ -306,12 +306,17 @@ function Settings() {
                 <Col xs={12} md={6} className='addDoctorCol'>
                     {searchDoctor ? (
                         <>
+                            <Row className='settingsRow'>
+                                <Col>
+                                    <h3 className='settingsSearchSubtitle'>Buscar Doctor</h3>
+                                </Col>
+                            </Row>
                             <Row className='insertDataRow'>
                                 <Col xs={0} md={1}></Col>
                                 <Col xs={12} md={10}>
                                     <Row>
                                         <Col>
-                                            <label className='insertDataText'>Ingrese el ID del doctor: </label>
+                                            <label className='insertDataText'>Ingrese el ID del doctor:</label>
                                             <input name='InputDeDoctor'
                                                 autoComplete='off'
                                                 className='inputDocID'
