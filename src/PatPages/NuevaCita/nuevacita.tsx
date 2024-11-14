@@ -19,23 +19,23 @@ function NuevaCita() {
 
     const [horariosDisponibles, setHorariosDisponibles] = useState<string[]>([]);
 
-    // useEffect(() => {
-    //     const fetchCitas = async () => {
-    //         const citasData = await getProcedimientos();
-    //         setTipoDeCita(citasData);
-    //     };
+    useEffect(() => {
+        const fetchCitas = async () => {
+            const citasData = await getProcedimientos();
+            setTipoDeCita(citasData);
+        };
 
-    //     fetchCitas();
-    // }, []);
+        fetchCitas();
+    }, []);
 
-    // useEffect(() => {
-    //     const fetchDoctores = async () => {
-    //         const doctoresData = await getDoctores();
-    //         setDoctores(doctoresData);
-    //     };
+    useEffect(() => {
+        const fetchDoctores = async () => {
+            const doctoresData = await getDoctores();
+            setDoctores(doctoresData);
+        };
 
-    //     fetchDoctores();
-    // }, []);
+        fetchDoctores();
+    }, []);
 
     useEffect(() => {
         if (doctorSeleccionado) {
