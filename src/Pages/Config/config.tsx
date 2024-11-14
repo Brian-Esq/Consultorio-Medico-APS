@@ -4,12 +4,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
-import { DoctorInfo, getEspecificDoc, postDoctor } from './configService';
+import { DoctorInfo, getEspecificDoc, postDoctor, TiposDeCita } from './configService';
 
 
 function Settings() {
     const [addNewDoctor, setAddNewDoctor] = useState(false);
     const [keepAdding, setKeepAdding] = useState(false);
+    const [searchDoctor, setSearchDoctor] = useState(false);
+    const [addTipoCita, setAddTipoCita] = useState(false);
     const [docName, setDocName] = useState('');
     const [docLastName, setDocLastName] = useState('');
     const [docCURP, setDocCURP] = useState('');
@@ -20,7 +22,6 @@ function Settings() {
     const [docPassConf, setDocPassConf] = useState('');
     const [ID, setID] = useState('');
     const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
-    const [searchDoctor, setSearchDoctor] = useState(false);
     const [doctores, setDoctores] = useState<DoctorInfo[]>([]);
     const [nextId, setNextId] = useState(1); // Initial ID
 
@@ -43,6 +44,12 @@ function Settings() {
         } else {
             alert('Por favor llene todos los campos');
         }
+    }
+
+    const handleSearchDoctor = () => {
+        setSearchDoctor(!searchDoctor);
+        setID('');
+        setDoctor(null);
     }
 
     const handleFinishAdding = () => {
@@ -104,12 +111,6 @@ function Settings() {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     };
-
-    const handleSearchDoctor = () => {
-        setSearchDoctor(!searchDoctor);
-        setID('');
-        setDoctor(null);
-    }
 
     const handleSuspendDoctor = () => {
         if (doctor) {
@@ -376,7 +377,6 @@ function Settings() {
                             </Row>
                         </>
                     )}
-
                 </Col>
                 <Col xs={0} md={3}></Col>
             </Row>
