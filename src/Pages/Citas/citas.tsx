@@ -91,7 +91,7 @@ function Citas() {
                                     id={cita.id}
                                     fecha={cita.fecha}
                                     hora={cita.hora}
-                                    TipoCita={cita.tipoCita}
+                                    TipoCita={cita.tipoCitaDescripcion}
                                     asistencia={cita.asistencia}
                                     Paciente={cita.nombrePaciente + ' ' + cita.aPaternoPaciente + ' ' + cita.aMaternoPaciente}
                                     Empleado={cita.nombreEmpleado + ' ' + cita.aPaternoEmpleado + ' ' + cita.aMaternoEmpleado}

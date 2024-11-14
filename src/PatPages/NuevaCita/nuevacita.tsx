@@ -5,30 +5,50 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 //Para pruebas locales sin el backend
-import { CitasDisp, getCitasDispArray, TiposDeCita, getTiposCita, FechaYHora } from './nuevaCitaService';
+import { CitasDisp, getCitasDispArray, TiposDeCita, getTiposCita, FechaYHora, getProcedimientos, Empleado, getDoctores, getHorarios, postCita } from './nuevaCitaService';
 //Para cuando se conecte con el backend
 // import { getDoctores, getProcedimientos, getHorarios, postCita, TiposDeCita, getTiposCita, FechaYHora } from './nuevaCitaService';
 
 function NuevaCita() {
-    const [citasDisp, setCitasDisp] = useState<CitasDisp[]>([]);
+    const [citasDisp, setCitasDisp] = useState<Empleado[]>([]);
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const [horaSeleccionada, setHoraSeleccionada] = useState('');
     const [fechaSeleccionada, setFechaSeleccionada] = useState('');
-    const [horariosDisponibles, setHorariosDisponibles] = useState<FechaYHora[]>([]);
+    //const [horariosDisponibles, setHorariosDisponibles] = useState<FechaYHora[]>([]);
     const [tipoCitaSel, setTipoCitaSel] = useState('');
     const [mostrarHorarios, setMostrarHorarios] = useState(false);
-    const tiposCita: TiposDeCita[] = getTiposCita();
+    // const tiposCita: TiposDeCita[] = getTiposCita();
+    const [tiposCita, setTipoDeCita] = useState<TiposDeCita[]>([]);
+    const [doctores, setDoctores] = useState<Empleado[]>([]);
+
+    const [horariosDisponibles, setHorariosDisponibles] = useState<string[]>([]);
 
     useEffect(() => {
-        // Simulación de carga de datos de doctores y sus disponibilidades
-        const datosDoctores = getCitasDispArray();
-        setCitasDisp(datosDoctores);
+        const fetchCitas = async () => {
+            const citasData = await getProcedimientos();
+            setTipoDeCita(citasData);
+        };
+
+        fetchCitas();
     }, []);
 
     useEffect(() => {
+        const fetchDoctores = async () => {
+            const doctoresData = await getDoctores();
+            setDoctores(doctoresData);
+        };
+
+        fetchDoctores();
+    }, []);
+
+    // useEffect(() => {
+    //     // Simulación de carga de datos de doctores y sus disponibilidades
+    //     const datosDoctores = getCitasDispArray();
+    //     setCitasDisp(datosDoctores);
+    // }, []);
+
+    useEffect(() => {
         if (doctorSeleccionado) {
-            const doctor = citasDisp.find(d => d.doctor === doctorSeleccionado);
-            setHorariosDisponibles(doctor ? doctor.FechaYHora : []);
             setFechaSeleccionada('');
             setHoraSeleccionada('');
             setTipoCitaSel('');
@@ -40,20 +60,27 @@ function NuevaCita() {
             setTipoCitaSel('');
             setMostrarHorarios(false);
         }
-    }, [doctorSeleccionado, citasDisp]);
+    }, [doctorSeleccionado, doctores]);
 
-    useEffect(() => {
-        if (fechaSeleccionada) {
-            const doctor = citasDisp.find(d => d.doctor === doctorSeleccionado);
-            const horarios = doctor ? doctor.FechaYHora.filter(h => h.fecha === fechaSeleccionada) : [];
-            setHorariosDisponibles(horarios);
-        }
-    }, [fechaSeleccionada, doctorSeleccionado, citasDisp]);
+    const fetchHorarios = async () => {
+                     const doctor = doctores.find(d => d.nombre === doctorSeleccionado);
+                     const horarios = await getHorarios(doctor!.id,fechaSeleccionada);
+                     setHorariosDisponibles(horarios);
+    }
+    
+    // useEffect(() => {
+    //     if (fechaSeleccionada) {
+    //         const doctor = citasDisp.find(d => d.doctor === doctorSeleccionado);
+    //         const horarios = doctor ? doctor.FechaYHora.filter(h => h.fecha === fechaSeleccionada) : [];
+    //         setHorariosDisponibles(horarios);
+    //     }
+    // }, [fechaSeleccionada, doctorSeleccionado, citasDisp]);
 
     const handleShowInfo = () => {
         if(doctorSeleccionado && fechaSeleccionada && tipoCitaSel){
-            if (fechaSeleccionada === horariosDisponibles.find(h => h.fecha === fechaSeleccionada)?.fecha) {
+            if (fechaSeleccionada && horariosDisponibles != null) {
                 setMostrarHorarios(true);
+                fetchHorarios();
             } else {
                 alert('No hay horarios disponibles para la fecha seleccionada');
             }
@@ -63,6 +90,9 @@ function NuevaCita() {
     }
 
     const handleReserve = () => {
+        const doctor = doctores.find(d => d.nombre === doctorSeleccionado);
+        const tipoCita = tiposCita.find(d => d.descripcion === tipoCitaSel);
+        postCita(doctor!.id,tipoCita!.id,fechaSeleccionada,horaSeleccionada);
         alert(`Cita reservada con el Doctor: ${doctorSeleccionado}\nFecha: ${fechaSeleccionada}\nHora: ${horaSeleccionada}\nTipo de Cita: ${tipoCitaSel}`);
         setDoctorSeleccionado('');
         setHorariosDisponibles([]);
@@ -72,7 +102,7 @@ function NuevaCita() {
         setMostrarHorarios(false);
     }
 
-    const timeSlots = Array.from({ length: 12 }, (_, i) => `${9 + i}:00`);
+    const timeSlots = Array.from({ length: 12 }, (_, i) => `${9 + i}:00:00`);
 
     return (
         <Container className='nuevaCitaPage'>
@@ -90,8 +120,8 @@ function NuevaCita() {
                             <Form.Control as="select" value={doctorSeleccionado} onChange={(e) => setDoctorSeleccionado(e.target.value)} 
                             className='select'>
                                 <option value="">Seleccione un doctor</option>
-                                {citasDisp.map((doctor, index) => (
-                                    <option key={index} value={doctor.doctor}>{doctor.doctor}</option>
+                                {doctores.map((doctor, index) => (
+                                    <option key={index} value={doctor.nombre}>{'Dr.'+doctor.nombre + ' ' + doctor.aPaterno + ' ' + doctor.aMaterno}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
@@ -101,7 +131,7 @@ function NuevaCita() {
                                 disabled={!doctorSeleccionado} className='select'>
                                 <option value="">Seleccione un tipo</option>
                                 {tiposCita.map((tipo, index) => (
-                                    <option key={index} value={tipo.tipo}>{tipo.tipo}</option>
+                                    <option key={index} value={tipo.descripcion}>{tipo.descripcion}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
@@ -123,7 +153,7 @@ function NuevaCita() {
                         <div className='timeSlots'>
                             <h2 className='NCSubtitle'>Horarios Disponibles</h2>
                             {timeSlots.map((time, index) => {
-                                const isAvailable = horariosDisponibles.some(h => h.hora.includes(time));
+                                const isAvailable = horariosDisponibles.some(h => h.includes(time));
                                 return (
                                     <div key={index} className={`timeSlot ${isAvailable ? 'available' : 'unavailable'} ${horaSeleccionada === time ? 'selected' : ''}`} 
                                         onClick={() => isAvailable && setHoraSeleccionada(time)}>

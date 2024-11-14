@@ -11,14 +11,18 @@ export interface CitasDisp {
 }
 
 export interface TiposDeCita{
-    tipo: string;
+    id:number;
+    descripcion: string;
 }
 
 export interface CitaMedica {
     id: number;
+    paciente_Id:number,
+    empleado_Id:number,
     fecha: string;
     hora: string;
-    tipoCita: string;
+    tipoCita: number;
+    tipoCitaDescripcion: string;
     asistencia: string;
     nombrePaciente: string;
     nombreEmpleado: string;
@@ -26,6 +30,22 @@ export interface CitaMedica {
     aMaternoEmpleado: string;
     aPaternoPaciente: string;
     aMaternoPaciente: string;
+    status: boolean;
+}
+
+export interface Empleado {
+        id:number,
+        tipoEmp: string,
+        salario: number,
+        nombre: string,
+        aPaterno: string,
+        aMaterno: string,
+        curp: string,
+        rfc: string,
+        numSeguro: string,
+        usuario: string,
+        contraseña: string,
+        status: boolean
 }
 
 //Solo para pruebas básicas sin backend y que no truene la app
@@ -89,13 +109,16 @@ export const getCitasDispArray = () =>{
 export const getTiposCita = () =>{
     const tiposCita : TiposDeCita[] = [
         {
-            tipo: "Consulta"
+            id:1,
+            descripcion: "Consulta"
         },
         {
-            tipo: "Examen"
+            id:2,
+            descripcion: "Examen"
         },
         {
-            tipo: "Operación"
+            id:3,
+            descripcion: "Operación"
         }
     ]
     return tiposCita;
@@ -103,34 +126,38 @@ export const getTiposCita = () =>{
 
 
 //Para conexión con el backend
-export const getDoctores = async (): Promise<string[]> => {
-    const response = await axios.get<string[]>('https://localhost:7215/api/Doctor');
+export const getDoctores = async (): Promise<Empleado[]> => {
+    const response = await axios.get<Empleado[]>('https://localhost:7215/api/Empleado');
     return response.data;
 }
 
-export const getProcedimientos = async (): Promise<string[]> => {
-    const response = await axios.get<string[]>('https://localhost:7215/api/Procedimiento');
+export const getProcedimientos = async (): Promise<TiposDeCita[]> => {
+    const response = await axios.get<TiposDeCita[]>('https://localhost:7215/api/TipoDeCita');
     return response.data;
 }
 
-export const getHorarios = async (doctor: string, fecha: string): Promise<string[]> => {
-    const response = await axios.get<string[]>('https://localhost:7215/api/Doctor/' + doctor + '/' + fecha);
+export const getHorarios = async (doctor: number, fecha: string): Promise<string[]> => {
+    const response = await axios.get<string[]>('https://localhost:7215/api/Empleado/' + doctor + '/' + fecha);
     return response.data;
 }
 
-export const postCita = async (doctor: string, tipoCita: string, fecha: string, hora: string): Promise<void> => {
+export const postCita = async (doctor: number, tipoCita: number, fecha: string, hora: string): Promise<void> => {
     const cita: CitaMedica = {
         id: 0,
         fecha: fecha,
         hora: hora,
         tipoCita: tipoCita,
         asistencia: "",
+        status: true,
+        paciente_Id:1,
+        empleado_Id:doctor,
+        tipoCitaDescripcion: "",
         nombrePaciente: "",
-        nombreEmpleado: doctor,
+        nombreEmpleado: "",
         aPaternoEmpleado: "",
         aMaternoEmpleado: "",
         aPaternoPaciente: "",
-        aMaternoPaciente: ""
+        aMaternoPaciente: "",
     }
     
     try {

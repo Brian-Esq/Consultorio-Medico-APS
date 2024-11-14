@@ -4,7 +4,8 @@ export interface CitaMedica {
     id: number;
     fecha: string;
     hora: string;
-    tipoCita: string;
+    tipoCita: number;
+    tipoCitaDescripcion: string;
     asistencia: string;
     nombrePaciente: string;
     nombreEmpleado: string;
@@ -27,7 +28,8 @@ export const getCitasArray = () =>{
             id: 1,
             fecha: "2024-10-21",
             hora: "10 am",
-            tipoCita: "Consulta",
+            tipoCita:1,
+            tipoCitaDescripcion: "Consulta",
             asistencia: "No",
             nombrePaciente: "Abraham",
             nombreEmpleado: "Cassian",
@@ -40,7 +42,8 @@ export const getCitasArray = () =>{
             id: 2,
             fecha: "2024-10-22",
             hora: "1 pm",
-            tipoCita: "Operación",
+            tipoCita:2,
+            tipoCitaDescripcion: "Operación",
             asistencia: "No",
             nombrePaciente: "Daniel",
             nombreEmpleado: "Pedro",

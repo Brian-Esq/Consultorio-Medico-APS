@@ -43,7 +43,7 @@ function Consulta() {
             setComentariosGen('');
             console.log(cita.id, cita.TipoCita, flCosto, comentariosGen);
             //Método post para enviar los datos al backend
-            finishConsulta(cita.id, cita.TipoCita, flCosto, comentariosGen, prescriptions);
+            finishConsulta(cita.id, flCosto, comentariosGen, prescriptions);
             alert('Consulta finalizada con éxito.');
             navigate('/citas');
         } else {

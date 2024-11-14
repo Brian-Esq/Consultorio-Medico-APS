@@ -12,9 +12,9 @@ interface Prescription {
     comentarios: string;
 }
 
-export const finishConsulta = async (cita_Id: number, procedimiento: string, costo: number, comentarios: string, detalles: Prescription[]): Promise<void> => {
+export const finishConsulta = async (cita_Id: number, costo: number, comentarios: string, detalles: Prescription[]): Promise<void> => {
     const url = 'https://localhost:7215/api/Consulta/ConsultaYDetalle'; // Replace with your backend API URL
-        const consulta = {cita_Id,procedimiento,costo,comentarios}
+        const consulta = {cita_Id,costo,comentarios}
         const data = {
             consulta,
             detalles
