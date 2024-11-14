@@ -39,3 +39,25 @@ export const putElement = async (elemento: ElementoInfo): Promise<void> => {
         console.error('Error:', error);
     }
 }
+
+export const getElementList = async (): Promise<ElementoInfo[]> => {
+    const response = await axios.get<ElementoInfo[]>('https://localhost:7215/api/Inventario');
+    return response.data;
+}
+
+export const putElementQuantity = async (id: number, cantidad: number): Promise<boolean> => {
+    try {
+        const response = await axios.put('https://localhost:7215/api/Inventario/' + id + '/Cantidad/' + cantidad);
+
+        if (response.status >= 200 && response.status < 300) {
+            console.log('Success:', response.statusText);
+            return true;
+        } else {
+            console.error('Error: Network response was not ok', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+}
