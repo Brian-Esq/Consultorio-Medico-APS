@@ -17,7 +17,7 @@ function Citas() {
     const [citas, setCitas] = useState<CitaMedica[]>([]);
 
 
-    /*Solo para pruebas básicas y que no truene la app*/
+    /*Usar para cuando se tenga conexión con el backend*/
     // useEffect(() => {
     //     const fetchCitas = async () => {
     //         const citasData = await getCitas();

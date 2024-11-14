@@ -5,46 +5,36 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 //Para pruebas locales sin el backend
-import { CitasDisp, getCitasDispArray, TiposDeCita, getTiposCita, FechaYHora, getProcedimientos, Empleado, getDoctores, getHorarios, postCita } from './nuevaCitaService';
+import { TiposDeCita, getProcedimientos, Empleado, getDoctores, getHorarios, postCita } from './nuevaCitaService';
 //Para cuando se conecte con el backend
-// import { getDoctores, getProcedimientos, getHorarios, postCita, TiposDeCita, getTiposCita, FechaYHora } from './nuevaCitaService';
 
 function NuevaCita() {
-    const [citasDisp, setCitasDisp] = useState<Empleado[]>([]);
     const [doctorSeleccionado, setDoctorSeleccionado] = useState('');
     const [horaSeleccionada, setHoraSeleccionada] = useState('');
     const [fechaSeleccionada, setFechaSeleccionada] = useState('');
-    //const [horariosDisponibles, setHorariosDisponibles] = useState<FechaYHora[]>([]);
     const [tipoCitaSel, setTipoCitaSel] = useState('');
     const [mostrarHorarios, setMostrarHorarios] = useState(false);
-    // const tiposCita: TiposDeCita[] = getTiposCita();
     const [tiposCita, setTipoDeCita] = useState<TiposDeCita[]>([]);
     const [doctores, setDoctores] = useState<Empleado[]>([]);
 
     const [horariosDisponibles, setHorariosDisponibles] = useState<string[]>([]);
 
-    useEffect(() => {
-        const fetchCitas = async () => {
-            const citasData = await getProcedimientos();
-            setTipoDeCita(citasData);
-        };
+    // useEffect(() => {
+    //     const fetchCitas = async () => {
+    //         const citasData = await getProcedimientos();
+    //         setTipoDeCita(citasData);
+    //     };
 
-        fetchCitas();
-    }, []);
-
-    useEffect(() => {
-        const fetchDoctores = async () => {
-            const doctoresData = await getDoctores();
-            setDoctores(doctoresData);
-        };
-
-        fetchDoctores();
-    }, []);
+    //     fetchCitas();
+    // }, []);
 
     // useEffect(() => {
-    //     // Simulación de carga de datos de doctores y sus disponibilidades
-    //     const datosDoctores = getCitasDispArray();
-    //     setCitasDisp(datosDoctores);
+    //     const fetchDoctores = async () => {
+    //         const doctoresData = await getDoctores();
+    //         setDoctores(doctoresData);
+    //     };
+
+    //     fetchDoctores();
     // }, []);
 
     useEffect(() => {
@@ -67,14 +57,6 @@ function NuevaCita() {
                      const horarios = await getHorarios(doctor!.id,fechaSeleccionada);
                      setHorariosDisponibles(horarios);
     }
-    
-    // useEffect(() => {
-    //     if (fechaSeleccionada) {
-    //         const doctor = citasDisp.find(d => d.doctor === doctorSeleccionado);
-    //         const horarios = doctor ? doctor.FechaYHora.filter(h => h.fecha === fechaSeleccionada) : [];
-    //         setHorariosDisponibles(horarios);
-    //     }
-    // }, [fechaSeleccionada, doctorSeleccionado, citasDisp]);
 
     const handleShowInfo = () => {
         if(doctorSeleccionado && fechaSeleccionada && tipoCitaSel){

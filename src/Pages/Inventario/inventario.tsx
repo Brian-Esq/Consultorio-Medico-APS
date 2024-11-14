@@ -5,22 +5,41 @@ import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import ElementoEspecifico from '../../Componentes/ElementoInvEspecifico/elementoInvEspecifico';
 import { ElementoInfo, getEspecificElement, postElement } from './inventarioService';
+import { parse } from 'path';
 
 
 function Inventario() {
     const [addNewElement, setAddNewElement] = useState(false);
+    const [searchElement, setSearchElement] = useState(false);
+    const [listElements, setListElements] = useState(false);
     const [elementoName, setElementoName] = useState('');
     const [elementoCant, setElementCantidad] = useState('');
     const [ID, setID] = useState('');
     const [elemento, setElemento] = useState<ElementoInfo | null>(null);
-    const [searchElement, setSearchElement] = useState(false);
     const [elementos, setElementos] = useState<ElementoInfo[]>([]);
+    //NOTA: Sólo para simular el ID de los elementos, en el backend se asignará automáticamente
     const [nextId, setNextId] = useState(1); // Initial ID
 
     const handleAddElement = () => {
         setAddNewElement(!addNewElement);
+        setSearchElement(false);
+        setListElements(false);
         setElementoName('');
         setElementCantidad('');
+    }
+
+    const handleSearchElement = () => {
+        setSearchElement(!searchElement);
+        setAddNewElement(false);
+        setListElements(false);
+        setID('');
+        setElemento(null);
+    }
+
+    const handleListElements = () => {
+        setListElements(!listElements);
+        setAddNewElement(false);
+        setSearchElement(false);
     }
 
     const handleFinishAdding = () => {
@@ -28,7 +47,7 @@ function Inventario() {
             const newElement: ElementoInfo = {
                 Id: nextId,
                 Nombre: elementoName,
-                Cantidad: 0,
+                Cantidad: parseInt(elementoCant),
                 Activo: true,
             };
             setElementos([...elementos, newElement]);
@@ -58,12 +77,6 @@ function Inventario() {
             alert('Ingrese un valor válido de búsqueda por ID');
             setID('');
         }
-    }
-
-    const handleSearchElement = () => {
-        setSearchElement(!searchElement);
-        setID('');
-        setElemento(null);
     }
 
     const handleSuspendElement = () => {
@@ -202,7 +215,7 @@ function Inventario() {
                                             Activo={elemento.Activo}
                                         />
                                     ) : (
-                                        <p className='elementNotFoundText'>Ingrese el ID de un elemento existente para encontrar un expediente</p>
+                                        <p className='elementNotFoundText'>Ingrese el ID de un elemento existente para encontrarlo</p>
                                     )}
                                 </Col>
                                 <Col xs={0} md={1}></Col>
@@ -230,7 +243,61 @@ function Inventario() {
                             </Row>
                         </>
                     )}
-
+                </Col>
+                <Col xs={0} md={3}></Col>
+            </Row>
+            <Row>
+                <Col xs={0} md={3}></Col>
+                <Col xs={12} md={6} className='addElementCol'>
+                    {!listElements ? (
+                        <>
+                            <Row className='selElBotRow'>
+                                <Col>
+                                    <p>Seleccione el botón para listar los elementos existentes</p>
+                                </Col>
+                            </Row>
+                            <Row className='botRowInv'>
+                                <Col>
+                                    <button className='addElementBot' onClick={handleListElements}>Listar Elementos</button>
+                                </Col>
+                            </Row>
+                        </>
+                    ) : (
+                        <>
+                            <Row className='inventoryRow'>
+                                <Col>
+                                    <h3 className='inventorySubtitle'>Lista de Elementos</h3>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <table className='inventoryTableList'>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {elementos.map((elemento, index) => (
+                                                <tr key={index}>
+                                                    <td>{elemento.Id}</td>
+                                                    <td>{elemento.Nombre}</td>
+                                                    <td>{elemento.Cantidad}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </Col>
+                            </Row>
+                            <Row className='botRowInv'>
+                                <Col>
+                                    <button className='canAddElementBot' onClick={handleListElements}>Cancelar</button>
+                                </Col>
+                            </Row>
+                        </>
+                    )}
                 </Col>
                 <Col xs={0} md={3}></Col>
             </Row>
