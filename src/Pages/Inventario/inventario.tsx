@@ -12,9 +12,12 @@ function Inventario() {
     const [addNewElement, setAddNewElement] = useState(false);
     const [searchElement, setSearchElement] = useState(false);
     const [listElements, setListElements] = useState(false);
+    const [modifyElement, setModifyElement] = useState(false);
     const [elementoName, setElementoName] = useState('');
     const [elementoCant, setElementCantidad] = useState('');
+    const [cantidadAgregada, setCantidadAgregada] = useState('');
     const [ID, setID] = useState('');
+    const [IDAumento, setIDAumento] = useState('');
     const [elemento, setElemento] = useState<ElementoInfo | null>(null);
     const [elementos, setElementos] = useState<ElementoInfo[]>([]);
     //NOTA: Sólo para simular el ID de los elementos, en el backend se asignará automáticamente
@@ -24,6 +27,7 @@ function Inventario() {
         setAddNewElement(!addNewElement);
         setSearchElement(false);
         setListElements(false);
+        setModifyElement(false);
         setElementoName('');
         setElementCantidad('');
     }
@@ -32,6 +36,7 @@ function Inventario() {
         setSearchElement(!searchElement);
         setAddNewElement(false);
         setListElements(false);
+        setModifyElement(false);
         setID('');
         setElemento(null);
     }
@@ -42,8 +47,14 @@ function Inventario() {
         setSearchElement(false);
     }
 
+    const handleModifyElement = () => {
+        setModifyElement(!modifyElement);
+        setAddNewElement(false);
+        setSearchElement(false);
+    }
+
     const handleFinishAdding = () => {
-        if (elementoName && elementoCant) {
+        if (elementoName && parseInt(elementoCant)) {
             const newElement: ElementoInfo = {
                 Id: nextId,
                 Nombre: elementoName,
@@ -57,7 +68,7 @@ function Inventario() {
             setElementoName('');
             setElementCantidad('');
         } else {
-            alert('Por favor llene todos los campos');
+            alert('Por favor llene todos los campos correctamente');
         }
     }
 
@@ -97,6 +108,34 @@ function Inventario() {
         } else {
             alert('No se ha seleccionado un elemento para suspender');
         }
+    }
+
+    const handleFinishModify = () => {
+        if (parseInt(IDAumento) && parseInt(cantidadAgregada)) {
+            let IDInt = parseInt(IDAumento);
+            let cantAgregadaInt = parseInt(cantidadAgregada);
+            //Solo para pruebas, el resto debe ser la petición put al backend
+            //Modificar el if para que haga la comprobación con la respuesta que devuelva la petición
+            const filterElement = elementos.find(e => e.Id === IDInt);
+            if (filterElement) {
+                filterElement.Cantidad += cantAgregadaInt;
+                setElementos(elementos.map(e => e.Id === IDInt ? filterElement : e));
+                alert('Cantidad aumentada exitosamente \n\n Datos: \n\nID: ' + IDAumento + '\nCantidad Agregada: ' + cantidadAgregada);
+                setIDAumento('');
+                setCantidadAgregada('');
+                setModifyElement(false);
+            } else {
+                alert('Elemento no encontrado');
+                setIDAumento('');
+                setCantidadAgregada('');
+            }
+        } else {
+            alert('Por favor llene todos los campos con números enteros');
+        }
+    }
+
+    const handleUpdateList = () => {
+        //Método para actualizar la lista de elementos haciendo petición get al backend
     }
 
     return (
@@ -295,7 +334,74 @@ function Inventario() {
                                 <Col>
                                     <button className='canAddElementBot' onClick={handleListElements}>Cancelar</button>
                                 </Col>
+                                <Col>
+                                    <button className='finishAddElmBot' onClick={handleUpdateList}>Actualizar Lista</button>
+                                </Col>
                             </Row>
+                        </>
+                    )}
+                </Col>
+                <Col xs={0} md={3}></Col>
+            </Row>
+            <Row>
+                <Col xs={0} md={3}></Col>
+                <Col xs={12} md={6} className='addElementCol'>
+                    {!modifyElement ? (
+                        <>
+                            <Row className='selElBotRow'>
+                                <Col>
+                                    <p>Seleccione el botón para aumentar la cantidad de un elemento</p>
+                                </Col>
+                            </Row>
+                            <Row className='botRowInv'>
+                                <Col>
+                                    <button className='addElementBot' onClick={handleModifyElement}>Agregar cantidad</button>
+                                </Col>
+                            </Row>
+                        </>
+                    ) : (
+                        <>
+                        <Row className='inventoryRow'>
+                            <Col>
+                                <h3 className='inventorySubtitle'>Aumentar Cantidad</h3>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className='invFields'>
+                                <label className='invText'>ID: </label>
+                            </Col>
+                            <Col>
+                                <input name='ElmName'
+                                    autoComplete='off'
+                                    className='inputElmInv'
+                                    value={IDAumento}
+                                    required
+                                    onChange={(e) => setIDAumento(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className='invFields'>
+                                <label className='invText'>Cantidad Agregada: </label>
+                            </Col>
+                            <Col>
+                                <input name='ElmName'
+                                    autoComplete='off'
+                                    className='inputElmInv'
+                                    value={cantidadAgregada}
+                                    required
+                                    onChange={(e) => setCantidadAgregada(e.target.value)}
+                                />
+                            </Col>
+                        </Row>
+                        <Row className='botRowInv'>
+                            <Col>
+                                <button className='canAddElementBot' onClick={handleModifyElement}>Cancelar</button>
+                            </Col>
+                            <Col>
+                                <button className='finishAddElmBot' onClick={handleFinishModify}>Aceptar</button>
+                            </Col>
+                        </Row>
                         </>
                     )}
                 </Col>
