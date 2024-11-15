@@ -12,3 +12,134 @@
     font-size: 40px;
     margin: 5px 30px;
 }
+
+.addProfileCol{
+    background-color: azure;
+    border-radius: 20px;
+    box-shadow: 5px 10px 9px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    min-height: 100px;
+}
+
+.profileSubtitle{
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.profileFields {
+    margin-bottom: 15px;
+}
+
+.profileText{
+    float: right;
+    margin-left: 20px;
+}
+
+.inputProfSettings {
+    box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    float: left;
+}
+
+.changeDataBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(40, 139, 204);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204);
+    float: none;
+}
+
+.changeDataBot:hover,
+.changeDataBot:active,
+.changeDataBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(40, 139, 204) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204) !important;
+    float: none;
+}
+
+.changeProfBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(40, 139, 204);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204);
+    float: none;
+}
+
+.changeProfBot:hover,
+.changeProfBot:active,
+.changeProfBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(40, 139, 204) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(40, 139, 204) !important;
+    float: none;
+}
+
+.canChangeDataBot {
+    background-color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    color: rgb(177, 70, 21);
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21);
+    float: none;
+}
+
+.canChangeDataBot:hover,
+.canChangeDataBot:active,
+.canChangeDataBot:focus {
+    color: white;
+    font-weight: bold;
+    font-family: 'Nunito Sans', sans-serif;
+    background-color: rgb(177, 70, 21) !important;
+    width: 150px;
+    height: 35px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgb(177, 70, 21) !important;
+    float: none;
+}
