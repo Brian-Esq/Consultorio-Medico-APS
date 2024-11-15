@@ -80,7 +80,7 @@ function Perfil() {
                         <>
                         <Row>
                             <Col className='profileFields'>
-                                <label className='profileText'>Nombres: </label>
+                                <label className='profileText'>Nombre(s): </label>
                             </Col>
                             <Col>
                                 <input name='DocName'
