@@ -148,6 +148,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                                 autoComplete='off'
                                                 className='inputLogin'
                                                 required
+                                                type='password' // Change input type to password
                                                 value={NewPass}
                                                 onChange={(e) => setNewPass(e.target.value)}
                                             />
@@ -162,6 +163,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                                 autoComplete='off'
                                                 className='inputLogin'
                                                 required
+                                                type='password' // Change input type to password
                                                 value={ConfNewPass}
                                                 onChange={(e) => setConfNewPass(e.target.value)}
                                             />
@@ -193,6 +195,7 @@ const Login = ({ onLogin }: LoginProps) => {
                                                 autoComplete='off'
                                                 className='inputLogin'
                                                 required
+                                                type='password' // Change input type to password
                                                 value={Password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                             />
