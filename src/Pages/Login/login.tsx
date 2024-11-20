@@ -4,8 +4,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 interface User {
+    id:number;
     user: string;
     accountType: string;
   }
@@ -31,27 +33,21 @@ const Login = ({ onLogin }: LoginProps) => {
     const handleLogin = async () => {
         if (User && Password) {
             try {
-                const response = await fetch('https://localhost:7215/api/Auth', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
+                const response = await axios.post('https://localhost:7215/api/Auth', {
                         email: User,
                         password: Password,
-                    }),
-                });
-    
-                if (response.ok) {
-                    const data = await response.json();
-                    const user: User = { user: User , accountType: data.accountType};
+                    }
+                );
+                if (response.data.ok) {
+                    const data = response.data;
+                    const user: User = { id:data.id, user: User , accountType: data.accountType};
                     onLogin(user); // Notify the parent component of the login
                     setUser('');
                     setPassword('');
                     navigate('/'); // Redirect to the home page or dashboard
                 } else {
-                    const error = await response.json();
-                    alert(error.message || 'Login invalido');
+                    const error = response.data.message;
+                    alert(error || 'Login invalido');
                 }
             } catch (error) {
                 alert('Login incorrecto, verifique sus datos');
@@ -70,26 +66,21 @@ const Login = ({ onLogin }: LoginProps) => {
             if (validateEmail(NewUser)) {
                 if (NewPass === ConfNewPass) {
                     try {
-                        const response = await fetch('https://localhost:7215/api/Auth/new', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
+                        const response = await axios.post('https://localhost:7215/api/Auth/new', {
                                 correo: NewUser,
                                 contraseña: NewPass,
-                            }),
-                        });
-    
-                        if (response.ok) {
+                            }
+                        );
+
+                        if (response.data.ok) {
                             alert('Cuenta creada exitosamente');
                             setIsCreatingAccount(false);
                             setNewUser('');
                             setNewPass('');
                             setConfNewPass('');
                         } else {
-                            const error = await response.json();
-                            alert(error.message || 'Error al crear la cuenta');
+                            const error = response.data.message;
+                            alert(error || 'Error al crear la cuenta');
                         }
                     } catch (error) {
                         alert('Sucedio un error al crear la cuenta');

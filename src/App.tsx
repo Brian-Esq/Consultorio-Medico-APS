@@ -18,6 +18,7 @@ import Perfil from './PatPages/PerfilPac/perfil';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 interface User {
+  id:number;
   user: string;
   accountType: string;
 }
@@ -47,6 +48,7 @@ function App() {
       setIsPatient(false);
       localStorage.setItem('userType', 'Doctor');
     }
+    localStorage.setItem('id',user.id.toString());
     localStorage.setItem('isAuthenticated', 'true'); // Guardar el estado en localStorage
   };
 
@@ -55,6 +57,7 @@ function App() {
     setIsPatient(false);
     localStorage.removeItem('isAuthenticated'); // Eliminar el estado de localStorage
     localStorage.removeItem('userType'); // Eliminar el tipo de usuario de localStorage
+    localStorage.removeItem('id');
   };
 
   return (

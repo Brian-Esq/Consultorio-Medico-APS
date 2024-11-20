@@ -55,7 +55,7 @@ export const getHorarios = async (doctor: number, fecha: string): Promise<string
     return response.data;
 }
 
-export const postCita = async (doctor: number, tipoCita: number, fecha: string, hora: string): Promise<void> => {
+export const postCita = async (paciente:number,doctor: number, tipoCita: number, fecha: string, hora: string): Promise<void> => {
     const cita: CitaMedica = {
         id: 0,
         fecha: fecha,
@@ -63,7 +63,7 @@ export const postCita = async (doctor: number, tipoCita: number, fecha: string, 
         tipoCita: tipoCita,
         asistencia: "",
         status: true,
-        paciente_Id:1,
+        paciente_Id:paciente,
         empleado_Id:doctor,
         tipoCitaDescripcion: "",
         nombrePaciente: "",

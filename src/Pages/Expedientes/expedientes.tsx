@@ -10,19 +10,9 @@ import { Expediente, getExpediente, getExpedientes, getExpedientesArray } from '
 
 function Expedientes() {
     const [ID, setID] = useState('');
-    const [expediente, setExpediente] = useState<Expediente | null>(null);
+    let expediente:Expediente = {} as Expediente;
 
     const expedientes = getExpedientes();
-
-    const fetchExpediente = async (id: number): Promise<void> => {
-        try {
-            const expediente: Expediente = await getExpediente(id);
-            setExpediente(expediente);
-        } catch (error) {
-            console.error('Error fetching expediente:', error);
-            setExpediente(null);
-        }
-    };
     
     const handleSubmit = async () => {
         if (!ID.trim()) {
@@ -38,7 +28,7 @@ function Expedientes() {
             return;
         }
 
-        await fetchExpediente(IDInt);
+        expediente = await getExpediente(IDInt);
 
         if (!expediente) {
             alert('Paciente no encontrado');
