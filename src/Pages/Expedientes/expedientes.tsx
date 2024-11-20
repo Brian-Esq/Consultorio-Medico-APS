@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useState } from 'react';
 import ExpedienteEspecifico from '../../Componentes/ExpedienteEspecifico/expedienteEspecifico';
-import { Expediente, getExpedientesArray } from './expedientesService';
+import { Expediente, getExpediente, getExpedientes, getExpedientesArray } from './expedientesService';
 // import { Expediente, getExpedientes } from './expedientesService'; <-- Cambiar para pruebas
 
 
@@ -12,25 +12,39 @@ function Expedientes() {
     const [ID, setID] = useState('');
     const [expediente, setExpediente] = useState<Expediente | null>(null);
 
-    const expedientes = getExpedientesArray();
+    const expedientes = getExpedientes();
 
-    const handleSubmit = () => {
-        if (ID) {
-            let IDInt = parseInt(ID)
-            const filterExp = expedientes.find(expediente => expediente.PacId === IDInt);
-            if (filterExp) {
-                setExpediente(filterExp);
-                setID('');
-            } else {
-                alert('Paciente no encontrado');
-                setID('');
-                setExpediente(null);
-            }
-        } else {
+    const fetchExpediente = async (id: number): Promise<void> => {
+        try {
+            const expediente: Expediente = await getExpediente(id);
+            setExpediente(expediente);
+        } catch (error) {
+            console.error('Error fetching expediente:', error);
+            setExpediente(null);
+        }
+    };
+    
+    const handleSubmit = async () => {
+        if (!ID.trim()) {
             alert('Ingrese un valor válido de búsqueda por ID');
             setID('');
+            return;
         }
-    }
+
+        const IDInt = parseInt(ID);
+        if (isNaN(IDInt)) {
+            alert('El ID debe ser un número');
+            setID('');
+            return;
+        }
+
+        await fetchExpediente(IDInt);
+
+        if (!expediente) {
+            alert('Paciente no encontrado');
+        }
+        setID(''); 
+    };
 
     return (
         <Container className='expedientesPage'>

@@ -5,9 +5,10 @@ import Col from 'react-bootstrap/Col';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-interface User{
+interface User {
     user: string;
-}
+    accountType: string;
+  }
 
 interface LoginProps {
     onLogin: (user:User) => void;
@@ -27,52 +28,84 @@ const Login = ({ onLogin }: LoginProps) => {
         return regex.test(email);
     };
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (User && Password) {
-            const user: User = { user: User };
-            onLogin(user);
-            setUser('');
-            setPassword('');
-            navigate('/');
+            try {
+                const response = await fetch('https://localhost:7215/api/Auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: User,
+                        password: Password,
+                    }),
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    const user: User = { user: User , accountType: data.accountType};
+                    onLogin(user); // Notify the parent component of the login
+                    setUser('');
+                    setPassword('');
+                    navigate('/'); // Redirect to the home page or dashboard
+                } else {
+                    const error = await response.json();
+                    alert(error.message || 'Login invalido');
+                }
+            } catch (error) {
+                alert('Login incorrecto, verifique sus datos');
+            }
         } else {
-            setUser('');
-            setPassword('');
             alert('Por favor ingrese un usuario y contraseña');
         }
-    }
+    };
 
     const toggleCreateAccount = () => {
         setIsCreatingAccount(!isCreatingAccount);
     }
 
-    const handleCreateAccount = () => {
+    const handleCreateAccount = async () => {
         if (NewUser && NewPass && ConfNewPass) {
             if (validateEmail(NewUser)) {
                 if (NewPass === ConfNewPass) {
-                    alert('Cuenta creada exitosamente');
-                    setIsCreatingAccount(false);
-                    setNewUser('');
-                    setNewPass('');
-                    setConfNewPass('');
+                    try {
+                        const response = await fetch('https://localhost:7215/api/Auth/new', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                correo: NewUser,
+                                contraseña: NewPass,
+                            }),
+                        });
+    
+                        if (response.ok) {
+                            alert('Cuenta creada exitosamente');
+                            setIsCreatingAccount(false);
+                            setNewUser('');
+                            setNewPass('');
+                            setConfNewPass('');
+                        } else {
+                            const error = await response.json();
+                            alert(error.message || 'Error al crear la cuenta');
+                        }
+                    } catch (error) {
+                        alert('Sucedio un error al crear la cuenta');
+                    }
                 } else {
                     alert('Las contraseñas no coinciden');
                     setNewPass('');
                     setConfNewPass('');
                 }
-            }
-            else {
+            } else {
                 alert('Por favor ingrese un correo válido');
-                setNewUser('');
-                setNewPass('');
-                setConfNewPass('');
             }
         } else {
             alert('Por favor llene todos los campos');
-            setNewUser('');
-            setNewPass('');
-            setConfNewPass('');
         }
-    }
+    };
 
     return (
         <Container className='LoginPage'>

@@ -19,6 +19,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 interface User {
   user: string;
+  accountType: string;
 }
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
 
   const handleLogin = (user: User) => {
     setIsAuthenticated(true);
-    if (user.user.toLowerCase() === 'paciente') {
+    if (user.accountType === 'PAC') {
       setIsPatient(true);
       localStorage.setItem('userType', 'Paciente');
     } else {

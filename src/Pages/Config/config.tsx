@@ -52,6 +52,16 @@ function Settings() {
         setDoctor(null);
     }
 
+    const handleSearchDoctorID = async (id: number): Promise<void> => {
+        try {
+            const doctor: DoctorInfo = await getEspecificDoc(id);
+            setDoctor(doctor);
+        } catch (error) {
+            console.error('Error fetching doctor:', error);
+            setDoctor(null);
+        }
+    };
+    
     const handleFinishAdding = () => {
         if (docEmail && docPass && docPassConf) {
             if (validateEmail(docEmail)) {
@@ -89,22 +99,27 @@ function Settings() {
         }
     }
 
-    const handleSearchDocID = () => {
-        if (ID) {
-            let IDInt = parseInt(ID)
-            const filterDoc = doctores.find(doc => doc.Id === IDInt);
-            if (filterDoc) {
-                setDoctor(filterDoc);
-                setID('');
-            } else {
-                alert('Doctor no encontrado');
-                setID('');
-                setDoctor(null);
-            }
-        } else {
+    const handleSearchDocID = async () => {
+        setDoctor(null);
+        if (!ID.trim()) {
             alert('Ingrese un valor válido de búsqueda por ID');
             setID('');
+            return;
         }
+
+        const IDInt = parseInt(ID);
+        if (isNaN(IDInt)) {
+            alert('El ID debe ser un número');
+            setID('');
+            return;
+        }
+
+        await handleSearchDoctorID(IDInt);
+
+        if (!doctor) {
+            alert('Doctor no encontrado');
+        }
+        setID(''); 
     }
 
     const validateEmail = (email: string) => {

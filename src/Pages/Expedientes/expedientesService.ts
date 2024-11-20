@@ -37,3 +37,8 @@ export const getExpedientes = async (): Promise<Expediente[]> => {
     const response = await axios.get<Expediente[]>('https://localhost:7215/api/Expediente');
     return response.data;
 };
+
+export const getExpediente = async (id:number): Promise<Expediente> => {
+    const response = await axios.get<Expediente>(`https://localhost:7215/api/Expediente/${id}`);
+    return response.data;
+};

@@ -16,13 +16,13 @@ export interface TiposDeCita{
 }
 
 export const getEspecificDoc = async (id: number): Promise<DoctorInfo> => {
-    const response = await axios.get<DoctorInfo>('https://localhost:7215/api/Doctor/' + id);
+    const response = await axios.get<DoctorInfo>('https://localhost:7215/api/Empleado/' + id);
     return response.data;
 };
 
 export const postDoctor = async (doctor: DoctorInfo): Promise<void> => {
     try {
-        const response = await axios.post('https://localhost:7215/api/Doctor', doctor);
+        const response = await axios.post('https://localhost:7215/api/Empleado', doctor);
 
         if (response.status >= 200 && response.status < 300) {
             console.log('Success:', response.statusText);
@@ -36,7 +36,7 @@ export const postDoctor = async (doctor: DoctorInfo): Promise<void> => {
 
 export const putDoctor = async (doctor: DoctorInfo): Promise<void> => {
     try {
-        const response = await axios.put('https://localhost:7215/api/Doctor/' + doctor.Id, doctor);
+        const response = await axios.put('https://localhost:7215/api/Empleado/' + doctor.Id, doctor);
 
         if (response.status >= 200 && response.status < 300) {
             console.log('Success:', response.statusText);
