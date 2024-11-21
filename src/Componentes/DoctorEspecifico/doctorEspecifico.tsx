@@ -3,55 +3,57 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-interface DoctorInfo {
-    Id: number,
-    Nombres: string,
-    Apellidos: string,
-    CURP: string,
-    RFC: string,
-    NSS: string
+export interface DoctorInfo {
+    id: number,
+    nombre: string,
+    aPaterno: string,
+    aMaterno: string,
+    curp: string,
+    rfc: string,
+    numSeguro: string,
+    status: boolean,
 }
 
-const DoctorEspecifico: React.FC<DoctorInfo> = ({ Id, Nombres, Apellidos, CURP, RFC, NSS }) => {
+const DoctorEspecifico: React.FC<DoctorInfo> = ({ id, nombre, aPaterno, aMaterno, curp, rfc, numSeguro, status }) => {
     
-    const expediente = { Id, Nombres, Apellidos, CURP, RFC, NSS }
+    const doctor = { id, nombre, aPaterno, aMaterno, curp, rfc, numSeguro, status  }
 
     return (
         <Container className='doctorEspecificoComp'>
             <Row>
                 <Col>
-                    <p className='docInfoText'>Id: {expediente.Id}</p>
+                    <p className='docInfoText'>Id: {doctor.id}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>Nombres: {expediente.Nombres}</p>
+                    <p className='docInfoText'>Nombres: {doctor.nombre}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>Apellidos: {expediente.Apellidos}</p>
+                    <p className='docInfoText'>Apellidos: {doctor.aPaterno} {doctor.aMaterno}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>CURP: {expediente.CURP}</p>
+                    <p className='docInfoText'>CURP: {doctor.curp}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>RFC: {expediente.RFC}</p>
+                    <p className='docInfoText'>RFC: {doctor.rfc}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <p className='docInfoText'>NSS: {expediente.NSS}</p>
+                    <p className='docInfoText'>NSS: {doctor.numSeguro}</p>
                 </Col>
             </Row>
             <Row>
                 <Col>
                 <br />
-                    <p className='docInfoText' style={{color:'red'}}>AVISO: Si selecciona el botón de suspender, se suspenderá al doctor {expediente.Nombres} con ID {expediente.Id}</p>
+                    <p className='docInfoText' style={{color:'red'}}>AVISO: Si selecciona el botón de suspender, se suspenderá al doctor {doctor.nombre} con ID {doctor.id}</p>
                 </Col>
             </Row>
         </Container>

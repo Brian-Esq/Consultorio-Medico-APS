@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 export interface DoctorInfo {
-    Id: number,
-    Nombres: string,
-    Apellidos: string,
-    CURP: string,
-    RFC: string,
-    NSS: string,
-    Activo: boolean,
+    id: number,
+    nombre: string,
+    aPaterno: string,
+    aMaterno: string,
+    curp: string,
+    rfc: string,
+    numSeguro: string,
+    status: boolean,
 }
 
 export interface TiposDeCita{
@@ -36,7 +37,7 @@ export const postDoctor = async (doctor: DoctorInfo): Promise<void> => {
 
 export const putDoctor = async (doctor: DoctorInfo): Promise<void> => {
     try {
-        const response = await axios.put('https://localhost:7215/api/Empleado/' + doctor.Id, doctor);
+        const response = await axios.put('https://localhost:7215/api/Empleado/' + doctor.id, doctor);
 
         if (response.status >= 200 && response.status < 300) {
             console.log('Success:', response.statusText);

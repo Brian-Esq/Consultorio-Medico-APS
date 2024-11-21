@@ -2,7 +2,7 @@ import './config.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
 import { DoctorInfo, getEspecificDoc, postDoctor, TiposDeCita } from './configService';
 
@@ -13,7 +13,8 @@ function Settings() {
     const [searchDoctor, setSearchDoctor] = useState(false);
     const [addTipoCita, setAddTipoCita] = useState(false);
     const [docName, setDocName] = useState('');
-    const [docLastName, setDocLastName] = useState('');
+    const [docPLastName, setDocPLastName] = useState('');
+    const [docMLastName, setDocMLastName] = useState('');
     const [docCURP, setDocCURP] = useState('');
     const [docRFC, setDocRFC] = useState('');
     const [docNSS, setDocNSS] = useState('');
@@ -21,6 +22,7 @@ function Settings() {
     const [docPass, setDocPass] = useState('');
     const [docPassConf, setDocPassConf] = useState('');
     const [ID, setID] = useState('');
+    //let doctor: DoctorInfo = {} as DoctorInfo;
     const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
     const [doctores, setDoctores] = useState<DoctorInfo[]>([]);
     const [nextId, setNextId] = useState(1); // Initial ID
@@ -29,7 +31,8 @@ function Settings() {
         setAddNewDoctor(!addNewDoctor);
         setKeepAdding(false);
         setDocName('');
-        setDocLastName('');
+        setDocPLastName('');
+        setDocMLastName('');
         setDocCURP('');
         setDocRFC('');
         setDocNSS('');
@@ -39,7 +42,7 @@ function Settings() {
     }
 
     const handleKeepAdding = () => {
-        if (docName && docLastName && docCURP && docRFC && docNSS) {
+        if (docName && docPLastName && docMLastName && docCURP && docRFC && docNSS) {
             setKeepAdding(!keepAdding);
         } else {
             alert('Por favor llene todos los campos');
@@ -52,36 +55,38 @@ function Settings() {
         setDoctor(null);
     }
 
-    const handleSearchDoctorID = async (id: number): Promise<void> => {
-        try {
-            const doctor: DoctorInfo = await getEspecificDoc(id);
-            setDoctor(doctor);
-        } catch (error) {
-            console.error('Error fetching doctor:', error);
-            setDoctor(null);
-        }
-    };
+    // const handleSearchDoctorID = async (id: number): Promise<void> => {
+    //     try {
+    //         const doctor: DoctorInfo = await getEspecificDoc(id);
+    //         setDoctor(doctor);
+    //     } catch (error) {
+    //         console.error('Error fetching doctor:', error);
+    //         setDoctor(null);
+    //     }
+    // };
     
     const handleFinishAdding = () => {
         if (docEmail && docPass && docPassConf) {
             if (validateEmail(docEmail)) {
                 if (docPass === docPassConf) {
                     const newDoctor: DoctorInfo = {
-                        Id: nextId,
-                        Nombres: docName,
-                        Apellidos: docLastName,
-                        CURP: docCURP,
-                        RFC: docRFC,
-                        NSS: docNSS,
-                        Activo: true
+                        id: nextId,
+                        nombre: docName,
+                        aPaterno: docPLastName,
+                        aMaterno: docMLastName,
+                        curp: docCURP,
+                        rfc: docRFC,
+                        numSeguro: docNSS,
+                        status: true
                     };
                     setDoctores([...doctores, newDoctor]);
                     setNextId(nextId + 1); // Increment the ID for the next doctor
-                    alert('Doctor agregado exitosamente \n\n Datos: \n\nID: ' + nextId + '\n' + docName + '\n' + docLastName + '\n' + docCURP + '\n' + docRFC + '\n' + docNSS + '\n' + docEmail + '\n' + docPass + '\n' + docPassConf);
+                    alert('Doctor agregado exitosamente');
                     setAddNewDoctor(false);
                     setKeepAdding(false);
                     setDocName('');
-                    setDocLastName('');
+                    setDocMLastName('');
+                    setDocPLastName('');
                     setDocCURP('');
                     setDocRFC('');
                     setDocNSS('');
@@ -100,7 +105,6 @@ function Settings() {
     }
 
     const handleSearchDocID = async () => {
-        setDoctor(null);
         if (!ID.trim()) {
             alert('Ingrese un valor válido de búsqueda por ID');
             setID('');
@@ -114,12 +118,12 @@ function Settings() {
             return;
         }
 
-        await handleSearchDoctorID(IDInt);
-
-        if (!doctor) {
+        var doc = await getEspecificDoc(IDInt);
+        if (!doc) {
             alert('Doctor no encontrado');
+        }else{
+            setDoctor(doc);
         }
-        setID(''); 
     }
 
     const validateEmail = (email: string) => {
@@ -129,18 +133,9 @@ function Settings() {
 
     const handleSuspendDoctor = () => {
         if (doctor) {
-            /*Cambiar a que solo filtre el doctor que se busca suspender para luego mandar al método putDoctor
-            Usar lo siguiente cuando esté conectado al backend:
-
-            const espDoc = doctores.filter(doc => doc.Id === doctor.Id);
-            espDoc[0].Activo = false;
-            putDoctor(espDoc[0]);
-            */
-            const espDoc = doctores.filter(doc => doc.Id !== doctor.Id);
+            const espDoc = doctores.filter(doc => doc.id !== doctor.id);
             setDoctores(espDoc);
 
-            //Apartir de esto no reemplazar
-            setDoctor(null);
             alert('Doctor suspendido exitosamente');
         } else {
             alert('No se ha seleccionado un doctor para suspender');
@@ -195,15 +190,29 @@ function Settings() {
                                     </Row>
                                     <Row>
                                         <Col className='settFields'>
-                                            <label className='settText'>Apellidos: </label>
+                                            <label className='settText'>Apellido Paterno: </label>
                                         </Col>
                                         <Col>
                                             <input name='NewUser'
                                                 autoComplete='off'
                                                 className='inputDocSettings'
-                                                value={docLastName}
+                                                value={docPLastName}
                                                 required
-                                                onChange={(e) => setDocLastName(e.target.value)}
+                                                onChange={(e) => setDocPLastName(e.target.value)}
+                                            />
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col className='settFields'>
+                                            <label className='settText'>Apellido Materno: </label>
+                                        </Col>
+                                        <Col>
+                                            <input name='NewUser'
+                                                autoComplete='off'
+                                                className='inputDocSettings'
+                                                value={docMLastName}
+                                                required
+                                                onChange={(e) => setDocMLastName(e.target.value)}
                                             />
                                         </Col>
                                     </Row>
@@ -356,12 +365,14 @@ function Settings() {
                                 <Col xs={12} md={10}>
                                     {doctor ? (
                                         <DocInfo
-                                            Id={doctor.Id}
-                                            Nombres={doctor.Nombres}
-                                            Apellidos={doctor.Apellidos}
-                                            CURP={doctor.CURP}
-                                            RFC={doctor.RFC}
-                                            NSS={doctor.NSS}
+                                        id = {doctor.id}
+                                        nombre = {doctor.nombre}
+                                        aPaterno ={doctor.aPaterno}
+                                        aMaterno = {doctor.aMaterno}
+                                        curp = {doctor.curp}
+                                        rfc = {doctor.rfc}
+                                        numSeguro = {doctor.numSeguro}
+                                        status = {doctor.status}
                                         />
                                     ) : (
                                         <p className='docNotFoundText'>Ingrese un ID de doctor existente para encontrar un expediente</p>
