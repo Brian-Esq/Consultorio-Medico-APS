@@ -171,7 +171,7 @@ function Perfil() {
                             </Row>
                             <Row>
                                 <Col className='profileFields'>
-                                    <label className='profileText'>Fecha de Nacimiento: </label>
+                                    <label className='profileText'>Fecha de Nacimiento: <br/>(AAAA-MM-DD) </label>
                                 </Col>
                                 <Col>
                                     <input name='NewUser'

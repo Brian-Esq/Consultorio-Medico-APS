@@ -46,6 +46,7 @@
     background-color: #f8f8f8;
     transition: border-color 0.3s, box-shadow 0.3s;
     float: left;
+    vertical-align: middle;
 }
 
 .changeDataBot {
