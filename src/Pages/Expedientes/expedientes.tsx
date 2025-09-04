@@ -10,31 +10,48 @@ import { Expediente, getExpediente, getExpedientes, getExpedientesArray } from '
 
 function Expedientes() {
     const [ID, setID] = useState('');
-    let expediente:Expediente = {} as Expediente;
+    const [expediente, setExpediente] = useState<Expediente | null>(null);
 
-    const expedientes = getExpedientes();
+    const expedientes = getExpedientesArray();
     
-    const handleSubmit = async () => {
-        if (!ID.trim()) {
+    const handleSubmit = () => {
+        if (ID) {
+            let IDInt = parseInt(ID)
+            const filterExp = expedientes.find(expediente => expediente.PacId === IDInt);
+            if (filterExp) {
+                setExpediente(filterExp);
+                setID('');
+            } else {
+                alert('Paciente no encontrado');
+                setID('');
+                setExpediente(null);
+            }
+        } else {
             alert('Ingrese un valor válido de búsqueda por ID');
             setID('');
-            return;
         }
+    }   
+    // const handleSubmit = async () => {
+    //     if (!ID.trim()) {
+    //         alert('Ingrese un valor válido de búsqueda por ID');
+    //         setID('');
+    //         return;
+    //     }
 
-        const IDInt = parseInt(ID);
-        if (isNaN(IDInt)) {
-            alert('El ID debe ser un número');
-            setID('');
-            return;
-        }
+    //     const IDInt = parseInt(ID);
+    //     if (isNaN(IDInt)) {
+    //         alert('El ID debe ser un número');
+    //         setID('');
+    //         return;
+    //     }
 
-        expediente = await getExpediente(IDInt);
+    //     expediente = await getExpediente(IDInt);
 
-        if (!expediente) {
-            alert('Paciente no encontrado');
-        }
-        setID(''); 
-    };
+    //     if (!expediente) {
+    //         alert('Paciente no encontrado');
+    //     }
+    //     setID(''); 
+    // };
 
     return (
         <Container className='expedientesPage'>

@@ -20,7 +20,8 @@ function Citas() {
     /*Usar para cuando se tenga conexión con el backend*/
     useEffect(() => {
         const fetchCitas = async () => {
-            const citasData = await getCitas();
+            var id = localStorage.getItem('id');
+            const citasData = await getCitas(+id!);
             setCitas(citasData);
         };
 

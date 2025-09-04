@@ -75,6 +75,7 @@ function NuevaCita() {
         const doctor = doctores.find(d => d.nombre === doctorSeleccionado);
         const tipoCita = tiposCita.find(d => d.descripcion === tipoCitaSel);
         const paciente = localStorage.getItem('id');
+        console.log(paciente);
         postCita(+paciente!,doctor!.id,tipoCita!.id,fechaSeleccionada,horaSeleccionada);
         alert(`Cita reservada con el Doctor: ${doctorSeleccionado}\nFecha: ${fechaSeleccionada}\nHora: ${horaSeleccionada}\nTipo de Cita: ${tipoCitaSel}`);
         setDoctorSeleccionado('');

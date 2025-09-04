@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import ProgramacionesPat from '../../Componentes/PatProgs/patProgs';
 //Cambiar para pruebas
-import {CitaMedica, getCitasArray } from './miscitasService';
+import {CitaMedica, getCitas } from './miscitasService';
 // import {CitaMedica,getCitas } from './miscitasService';
 
 const ITEMS_PER_PAGE = 2;
@@ -16,24 +16,25 @@ function MisCitas() {
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [citas, setCitas] = useState<CitaMedica[]>([]);
 
-    /*Solo para pruebas básicas y que no truene la app*/
-    // useEffect(() => {
-    //     const fetchCitas = async () => {
-    //         const citasData = await getCitas();
-    //         setCitas(citasData);
-    //     };
-
-    //     fetchCitas();
-    // }, []);
 
     useEffect(() => {
         const fetchCitas = async () => {
-            const citasData = getCitasArray();
+            var id = localStorage.getItem('id');
+            const citasData = await getCitas(+id!);
             setCitas(citasData);
         };
 
         fetchCitas();
     }, []);
+
+    // useEffect(() => {
+    //     const fetchCitas = async () => {
+    //         const citasData = getCitasArray();
+    //         setCitas(citasData);
+    //     };
+
+    //     fetchCitas();
+    // }, []);
 
     const handleFilterCitas = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedDate(event.target.value);
@@ -90,7 +91,7 @@ function MisCitas() {
                                     id={cita.id}
                                     fecha={cita.fecha}
                                     hora={cita.hora}
-                                    TipoCita={cita.tipoCita}
+                                    TipoCita={cita.tipoCitaDescripcion}
                                     asistencia={cita.asistencia}
                                     Paciente={cita.nombrePaciente + ' ' + cita.aPaternoPaciente + ' ' + cita.aMaternoPaciente}
                                     Empleado={cita.nombreEmpleado + ' ' + cita.aPaternoEmpleado + ' ' + cita.aMaternoEmpleado}

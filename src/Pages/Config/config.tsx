@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from 'react';
 import DocInfo from '../../Componentes/DoctorEspecifico/doctorEspecifico';
-import { DoctorInfo, getEspecificDoc, postDoctor, TiposDeCita } from './configService';
+import { DoctorInfo, getEspecificDoc, postDoctor, putDoctor, TiposDeCita } from './configService';
 
 
 function Settings() {
@@ -24,7 +24,6 @@ function Settings() {
     const [ID, setID] = useState('');
     //let doctor: DoctorInfo = {} as DoctorInfo;
     const [doctor, setDoctor] = useState<DoctorInfo | null>(null);
-    const [doctores, setDoctores] = useState<DoctorInfo[]>([]);
     const [nextId, setNextId] = useState(1); // Initial ID
 
     const handleAddDoctor = () => {
@@ -65,7 +64,7 @@ function Settings() {
     //     }
     // };
     
-    const handleFinishAdding = () => {
+    const handleFinishAdding = async () => {
         if (docEmail && docPass && docPassConf) {
             if (validateEmail(docEmail)) {
                 if (docPass === docPassConf) {
@@ -77,22 +76,29 @@ function Settings() {
                         curp: docCURP,
                         rfc: docRFC,
                         numSeguro: docNSS,
-                        status: true
+                        status: true,
+                        correo: docEmail,
+                        contraseña: docPass
                     };
-                    setDoctores([...doctores, newDoctor]);
-                    setNextId(nextId + 1); // Increment the ID for the next doctor
-                    alert('Doctor agregado exitosamente');
-                    setAddNewDoctor(false);
-                    setKeepAdding(false);
-                    setDocName('');
-                    setDocMLastName('');
-                    setDocPLastName('');
-                    setDocCURP('');
-                    setDocRFC('');
-                    setDocNSS('');
-                    setDocEmail('');
-                    setDocPass('');
-                    setDocPassConf('');
+                    var result = await postDoctor(newDoctor);
+                    if(result){
+                        setNextId(nextId + 1); // Increment the ID for the next doctor
+                        alert('Doctor agregado exitosamente');
+                        setAddNewDoctor(false);
+                        setKeepAdding(false);
+                        setDocName('');
+                        setDocMLastName('');
+                        setDocPLastName('');
+                        setDocCURP('');
+                        setDocRFC('');
+                        setDocNSS('');
+                        setDocEmail('');
+                        setDocPass('');
+                        setDocPassConf('');
+                    }else{
+                        alert('No se pudo agregar el doctor');
+                    }
+                    
                 } else {
                     alert('Las contraseñas no coinciden');
                 }
@@ -121,6 +127,7 @@ function Settings() {
         var doc = await getEspecificDoc(IDInt);
         if (!doc) {
             alert('Doctor no encontrado');
+            setDoctor(null);
         }else{
             setDoctor(doc);
         }
@@ -131,12 +138,18 @@ function Settings() {
         return regex.test(email);
     };
 
-    const handleSuspendDoctor = () => {
+    const handleSuspendDoctor = async () => {
         if (doctor) {
-            const espDoc = doctores.filter(doc => doc.id !== doctor.id);
-            setDoctores(espDoc);
-
+            doctor.status = false;
+           var result = await putDoctor(doctor);
+           if(result){
             alert('Doctor suspendido exitosamente');
+            setDoctor(null);
+            setID('');
+           }else{
+            alert('No se pudo suspender al doctor');
+           }
+
         } else {
             alert('No se ha seleccionado un doctor para suspender');
         }

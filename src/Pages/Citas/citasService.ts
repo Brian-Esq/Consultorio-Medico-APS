@@ -16,8 +16,8 @@ export interface CitaMedica {
 
 }
 
-export const getCitas = async (): Promise<CitaMedica[]> => {
-    const response = await axios.get<CitaMedica[]>('https://localhost:7215/api/Cita');
+export const getCitas = async (id:number): Promise<CitaMedica[]> => {
+    const response = await axios.get<CitaMedica[]>('https://localhost:7215/api/Cita/Empleado/' + id);
     return response.data;
 };
 
